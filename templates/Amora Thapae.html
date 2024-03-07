@@ -91,7 +91,6 @@
         <div class="col-md-4 mb-3"> 
             <div class="card ">
                 <img class="card-img-top" src="{{ url_for('get_image',folder=hotels.get_name, image_name=images[i]) }}" style="width:100%" alt="Card image cap">
-                
                 <div class="card-body">
                     <h4 class="card-title"> {{ rooms[i].get_type_room}}</h4>
                     <p class="card-text"> 
@@ -100,7 +99,8 @@
                         โดยราคาต่อคืนจะอยู่ที่ <b>{{ rooms[i].get_price }}</b> บาท</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/Baiyoke Sky Hotel" class="btn btn-dark" >จองห้องพัก</a>
+                    <a href="{{ url_for('test_get_data', hotel=hotels.get_name, room=rooms[i]) }}" class="btn btn-dark" >จองห้องพัก</a>
+
                 </div>                
             </div>
         </div>

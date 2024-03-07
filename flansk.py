@@ -128,9 +128,16 @@ def hotel_page(hotel_name):
     room_list = hotel.get_room_list
     return render_template(f'{hotel_name}.html', rooms=room_list, images=images, hotels=hotel)
 
-
+@app.route('/testdata')
+def test_get_data():
+    hotel = request.args.get('hotel')
+    room = request.args.get('room')
+    hotel = control.seach_hotel_from_name(hotel)
+    return render_template('testdata.html', hotel=hotel, room=room)
 
 #----------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
