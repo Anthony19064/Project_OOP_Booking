@@ -27,6 +27,14 @@
     .text-body-emphasis {
         color: #007bff;
     }
+    .container-fluid {
+    max-height: 200px;
+    }
+
+    .container-fluid .container {
+        flex-grow: 1;
+    }
+
 </style>
 {% endblock %}
 
@@ -59,7 +67,7 @@
     
 
 <div class="container-fluid py-3" style="background-color: #353a40ea;">
-  <div class="container px-3">
+  <div class="container ">
       <ul class="nav justify-content-center navbar-dark">
           <li class="nav-item">
               <a class="nav-link active" aria-current="page"  href="#" style="color: rgb(255, 255, 255);">Contact</a>
