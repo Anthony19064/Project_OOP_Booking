@@ -20,7 +20,7 @@ AMORA_THAPAE = 'room_amorathapae'
 BAIYOKE_SKY_HOTEL = 'room_baiyokeskyhotel'
 BANGSEAN_HOTEL = 'room_bangseanhotel'
 BLU_MONKEY_HOTEL = 'room_blumonkeyhotel'
-BLUE_CARINA_HOTEL = 'room_blumonkeyhotel'
+BLUE_CARINA_HOTEL = 'room_bluecarinahotel'
 CENTARA_CHIANG_MAI = 'room_centarachiangmai'
 CITADINES_GRAND_CENTRAL = 'room_citadinesgrandcentral'
 GLORY_BOUTIQUE_HOTEL = 'room_gloryboutique'
@@ -97,7 +97,6 @@ def get_image(folder, image_name):
         return send_from_directory(THE_OPIUM, image_name)
     elif folder == 'The Quartier Hotel':
         return send_from_directory(THE_QUEARTIER_HOTEL, image_name)
-    
     
     else:
         return print("Invalid folder")
