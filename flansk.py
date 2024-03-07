@@ -52,7 +52,53 @@ def get_image(folder, image_name):
     elif folder == 'Amora Thapae':
         return send_from_directory(AMORA_THAPAE, image_name)
     elif folder == 'Baiyoke Sky Hotel':
-        return send_from_directory(AMORA_THAPAE, image_name)
+        return send_from_directory(BAIYOKE_SKY_HOTEL, image_name)
+    elif folder == 'Bangsean Hotel':
+        return send_from_directory(BANGSEAN_HOTEL, image_name)
+    elif folder == 'Blu Monkey Hotel':
+        return send_from_directory(BLU_MONKEY_HOTEL, image_name)
+    elif folder == 'Blue Carina Hotel':
+        return send_from_directory(BLUE_CARINA_HOTEL, image_name)
+    elif folder == 'Centara Chiang Mai':
+        return send_from_directory(CENTARA_CHIANG_MAI, image_name)
+    elif folder == 'Citadines Grand Central':
+        return send_from_directory(CITADINES_GRAND_CENTRAL, image_name)
+    elif folder == 'Glory Boutique':
+        return send_from_directory(GLORY_BOUTIQUE_HOTEL, image_name)
+    elif folder == 'Hotel Fuse Rayong':
+        return send_from_directory(HOTEL_FUSE_RAYONG, image_name)
+    elif folder == 'Karin Hotel':
+        return send_from_directory(KARIN_HOTEL, image_name)
+    elif folder == 'Le cassia Hotel':
+        return send_from_directory(LE_CASSIA_HOTEL, image_name)
+    elif folder == 'Lit Bangkok':
+        return send_from_directory(LIT_BANGKOK, image_name)
+    elif folder == 'Madera Residence':
+        return send_from_directory(MADERA_RESIDENCE, image_name)
+    elif folder == 'Nadee 10 Hotel':
+        return send_from_directory(NADEE_10_HOTEL, image_name)
+    elif folder == 'Novotel Rayong Star Centre':
+        return send_from_directory(NOVOTEL_RAYONG_STAR_CENTRE, image_name)
+    elif folder == 'Oakwood Hotel':
+        return send_from_directory(OAKWOOD_HOTEL, image_name)
+    elif folder == 'Phavina Hotel Rayong':
+        return send_from_directory(PHAVINA_HOTEL_RAYONG, image_name)
+    elif folder == 'Romantic Hotel':
+        return send_from_directory(ROMANTIC_HOTEL, image_name)
+    elif folder == 'Seabed Grand Hotel':
+        return send_from_directory(SEABED_GRAND_HOTEL, image_name)
+    elif folder == 'Sirin Hotel':
+        return send_from_directory(SIRIN_HOTEL, image_name)
+    elif folder == 'Star Convention Hotel':
+        return send_from_directory(STAR_CONVENTION_HOTEL, image_name)
+    elif folder == 'The Blanket Hotel':
+        return send_from_directory(THE_BLANKET_HOTEL, image_name)
+    elif folder == 'The Opium':
+        return send_from_directory(THE_OPIUM, image_name)
+    elif folder == 'The Quartier Hotel':
+        return send_from_directory(THE_QUEARTIER_HOTEL, image_name)
+    
+    
     else:
         return print("Invalid folder")
 
