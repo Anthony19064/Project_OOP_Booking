@@ -1,38 +1,80 @@
 {% extends "layout.html" %}
 
 {% block style %}
-<!-- เรียกใช้ CSS ของ Bootstrap -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    /* ไม่ต้องเพิ่มสไตล์เพิ่มเติม */
+    /* เพิ่มสไตล์ตามที่ต้องการ */
+    .feature-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        color: white;
+        background-color: #007bff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+    }
+
+    .text-bg-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .bg-gradient {
+        background: linear-gradient(45deg, #007bff, #00bfff);
+    }
+
+    .text-body-emphasis {
+        color: #007bff;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <div class="row g-5">
-        <div class="col-md-12">
-            <h4 class="mb-3">Report Form</h4>
-            <form>
-                <div class="form-group">
-                    <label for="name">ชื่อผู้ใช้งาน:</label>
-                    <input type="text" class="form-control" id="name" placeholder="โปรดกรอกชื่อผู้ใช้งาน" required>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="feature col">
+            <h3 class="fs-2 text-body-emphasis">Report a Problem</h3>
+            <p>If you encounter any issues or have any suggestions for improvement, please let us know by filling out the form below.</p>
+            <form action="/submit_report" method="post">
+                <div class="mb-3">
+                    <label for="problem-description" class="form-label">Problem Description</label>
+                    <textarea class="form-control" id="problem-description" rows="4" name="problem-description" required></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="email">อีเมลล์:</label>
-                    <input type="email" class="form-control" id="email" placeholder="โปรดกรอกอีเมลล์ผู้ใช้งาน" required>
-                </div>
-                <div class="form-group">
-                    <label for="problems">ปัญหาที่พบ:</label>
-                    <textarea class="form-control" id="problems" rows="3" placeholder="โปรดกรอกปัญหาที่พบ" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="suggestions">ข้อเสนอแนะ:</label>
-                    <textarea class="form-control" id="suggestions" rows="3" placeholder="โปรดกรอกข้อเสนอแนะ" required></textarea>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <p class="text-center">Thank you for using our website</p>
+        </div>
+    </div>
 </div>
+
+    
+
+<div class="container-fluid py-3" style="background-color: #353a40ea;">
+  <div class="container px-3">
+      <ul class="nav justify-content-center navbar-dark">
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page"  href="#" style="color: rgb(255, 255, 255);">Contact</a>
+          </li>
+          <li class="nav-item">
+              <!-- <a class="nav-link" href="#">Contact</a> -->
+          </li>
+      </ul>
+      <div class="row">
+          <div class="col-md-12">
+              <p class="text-center text-white">Phone: 080-123-4567</p>
+              <p class="text-center text-white">Email: example@example.com</p>
+          </div>
+      </div>
+  </div>
+</div>
+
 {% endblock %}
