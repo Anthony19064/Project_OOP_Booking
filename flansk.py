@@ -104,7 +104,7 @@ def hotel_page(hotel_name):
 
 
 
-# @app.route('/Amora Thapae')S
+# @app.route('/Amora Thapae')
 # def AmoraThapae():
 #     images = os.listdir(IMAGE_FOLDER_ROOM)
 #     hotel = control.seach_hotel_from_name('Amora Thapae')
