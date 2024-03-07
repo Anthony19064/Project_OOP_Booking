@@ -41,6 +41,7 @@ THE_BLANKET_HOTEL = 'room_amorathapae'
 THE_OPIUM = 'room_amorathapae'
 THE_QUEARTIER_HOTEL = 'room_amorathapae'
 
+print("")
 @app.route('/images/<path:folder>/<path:image_name>')
 def get_image(folder, image_name):
     folder = str(folder)
