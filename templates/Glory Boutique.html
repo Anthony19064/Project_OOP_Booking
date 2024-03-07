@@ -84,7 +84,7 @@
     </a>
   </div>
 
-
+{{ hotels.getname }}
 <div class="container">
     <div class="row">
         {% for i in range(rooms|length) %}
@@ -100,7 +100,7 @@
                         โดยราคาต่อคืนจะอยู่ที่ <b>{{ rooms[i].get_price }}</b> บาท</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/Baiyoke Sky Hotel" class="btn btn-primary" >จองห้องพัก</a>
+                    <a href="/Baiyoke Sky Hotel" class="btn btn-dark" >จองห้องพัก</a>
                 </div>                
             </div>
         </div>
