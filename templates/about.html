@@ -1,121 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boostrap 5 template</title>
-    <link rel="shortcut icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/eJuvWSnbPwEWAQCYwl8i9nPJXRzTv94JSYGGrKIu0qeuG_5wgYtb982-2F_jOGtIytY">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
-    <style>
-        body {
-            font-family: Tahoma;
-            margin: 100;
-            padding: 100;
-            
-        }
-         
-        .display-5 {
-            font-weight: bold;
-            font-size: 20px;
-        }
+{% extends "layout.html" %}
 
-        .lead {
-        font-size: 16px; 
-      }
-   
-   </style>
-   
-</head>
-<body>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  
+{% block style %}
+<style>
 
-        <!-- Header -->
-        <div class="container">
-          <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-              <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-              <span class="fs-4">Booking</span>
-            </a>
-    
-            <ul class="nav nav-pills">
-              <li class="nav-item"><a href="/index" class="nav-link active" aria-current="page">Home</a></li>
-              <li class="nav-item"><a href="/hotel" class="nav-link">Hotel</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Taxi</a></li>
-              <li class="nav-item"><a href="/report" class="nav-link">Report</a></li>
-              <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-            </ul>
-          </header>
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container px-4 py-5" id="about-us">
+    <h2 class="pb-2 border-bottom">About Us</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Our Mission</h3>
+            <p>We are dedicated to providing the best experience for our customers. Our mission is to deliver exceptional service and satisfaction to every individual who interacts with our platform.</p>
         </div>
-        <!-- Header -->
-  
-    <!-- Body -->
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-      <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 py-3">
-          <h2 class="display-5" style="color: rgb(255, 255, 255);">About US</h2>
-          <p class="lead" style=" color: rgb(255, 255, 255) ;">ยินดีต้อนรับสู่เว็บไซต์การจองโรงแรมของเรา!!! ทีมผู้พัฒนาได้พัฒนาและดูแลระบบการจองต่างๆ เช่น โรงแรมที่พัก รวมถึงการจองรถแท็กซี่ เพื่อทำให้การวางแผนการเดินของคุณเป็นเรื่องที่ง่ายและสะดวกสบายมากยิ่งขึ้น หวังว่าการพัฒนาซอฟต์แวร์และการบริการของเว็บเรา ทีมผู้พัฒนาจะมุ่งมั่นที่จะให้บริการที่ดีที่สุดแก่ผู้ใช้งานของเราทุกคน</p>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Our Team</h3>
+            <p>We have a team of dedicated professionals who are passionate about delivering excellence. Our diverse team brings together a range of expertise to ensure we meet the needs of our customers.</p>
         </div>
-        <img src="/static/Hotel Fuse Rayong.jpg" alt="" style="width: 100%; height: auto; border-radius: 21px 21px 0 0;">
-      </div>
-      <div class="bg-body-tertiary me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-        <div class="my-3 p-3">
-          <h2 class="display-5" style="color: rgb(0, 0, 0);">การติดต่อ</h2>
-          <p class="lead" style="color: rgb(0, 0, 0);">หากคุณมีคำถามหรือข้อสงสัยใด ๆ เกี่ยวกับการใช้บริการของเรา หรือต้องการความช่วยเหลือเพิ่มเติม โปรดอย่าลังเลที่จะติดต่อเราทางอีเมล AAR_XXX@hotelbooking.com หรือโทรติดต่อหมายเลขฝ่ายบริการลูกค้าของเราที่ Admin : 098-4645087
-ขอบคุณที่ใช้บริการเว็บไซต์การจองโรงแรมของเรา หวังว่าคุณจะมีประสบการณ์การเดินทางที่น่าจดจำและประทับใจ!!!</p>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Our Values</h3>
+            <p>At our core, we value integrity, innovation, and customer satisfaction. These principles guide everything we do and shape the way we interact with our customers and partners.</p>
         </div>
-        <img src="/static/Baiyoke Sky Hotel.jpg" alt="" style="width: 100%; height: auto; border-radius: 10px 10px 0 0;">
-      </div>
     </div>
-    <!-- Body -->
-    
+    <div class="row">
+        <div class="col">
+            <p class="text-center">Thank you for useing my web</p>
+        </div>
+    </div>
+</div>
 
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<div class="container-fluid py-3" style="background-color: #353a40ea;">
+  <div class="container px-3">
+      <ul class="nav justify-content-center navbar-dark">
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page"  href="#" style="color: rgb(255, 255, 255);">Contact</a>
+          </li>
+          <li class="nav-item">
+              <!-- <a class="nav-link" href="#">Contact</a> -->
+          </li>
+      </ul>
+      <div class="row">
+          <div class="col-md-12">
+              <p class="text-center text-white">เบอร์โทร: 080-123-4567</p>
+              <p class="text-center text-white">อีเมล์: example@example.com</p>
+          </div>
+      </div>
   </div>
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- Body -->
-  <!-- <div class="container">
-    <h1>About us</h1>
-    <p><b style="color:rgb(8, 8, 122)">เกี่ยวกับเรา</b></p>    
-    <p>ยินดีต้อนรับสู่เว็บไซต์การจองโรงแรมของเรา!!!  <br />ทีมผู้พัฒนาได้พัฒนาและดูแลระบบการจองต่างๆ เช่น โรงแรมที่พัก รวมถึงการจองรถแท็กซี่ เพื่อทำให้การวางแผนการเดินของคุณเป็นเรื่องที่ง่ายและสะดวกสบายมากยิ่งขึ้น หวังว่าการพัฒนาซอฟต์แวร์และการบริการของเว็บเรา ทีมผู้พัฒนาจะมุ่งมั่นที่จะให้บริการที่ดีที่สุดแก่ผู้ใช้งานของเราทุกคน <br />
-   
-    <p><b style="color:rgb(8, 8, 122)">วัตถุประสงค์</b></p>
-    <p>พันธกิจของเราคือการทำให้การจองโรงแรมเป็นเรื่องง่ายและสะดวกสบายที่สุดสำหรับลูกค้าของเรา โดยให้บริการที่มีคุณภาพและประสิทธิภาพ เรามุ่งมั่นที่จะสร้างประสบการณ์การใช้บริการที่น่าพอใจและทันสมัยสำหรับผู้ใช้ทุกคน</p>
-    
-    <p><b style="color:rgb(8, 8, 122)">บริการของเรา</b></p>
-    <p>เราให้บริการในการจองโรงแรมทั่วโลก โดยมีรายละเอียดและข้อมูลที่ครบครันเกี่ยวกับโรงแรมต่าง ๆ ที่คุณสามารถเลือกใช้บริการได้ตามต้องการ เรามีระบบค้นหาที่สะดวกสบายและใช้งานง่าย ทำให้คุณสามารถหาและจองที่พักได้อย่างรวดเร็วและง่ายดาย</p>
-    
-    <p><b style="color:rgb(8, 8, 122)">การติดต่อ</b></p>
-    <p>หากคุณมีคำถามหรือข้อสงสัยใด ๆ เกี่ยวกับการใช้บริการของเรา หรือต้องการความช่วยเหลือเพิ่มเติม โปรดอย่าลังเลที่จะติดต่อเราทางอีเมล AAR_XXX@hotelbooking.com หรือโทรติดต่อหมายเลขฝ่ายบริการลูกค้าของเราที่ Admin : 098-4645087</p>
-    
-    <p> ขอบคุณที่ใช้บริการเว็บไซต์การจองโรงแรมของเรา หวังว่าคุณจะมีประสบการณ์การเดินทางที่น่าจดจำและประทับใจ!!!</p>
-</div>  -->
-<!-- Body -->
-
-
-
-
-
-
-
-    <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+{% endblock %}

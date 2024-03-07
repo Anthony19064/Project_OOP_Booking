@@ -1,51 +1,38 @@
 {% extends "layout.html" %}
+
 {% block style %}
-
+<!-- เรียกใช้ CSS ของ Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <style>
-    body {
-        margin: 100;
-        padding: 100;
-    }
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-        text-align: center;
-    }
-    textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #000000;
-        border-radius: 4px;
-        resize: none;
-
-    }
-    button {
-        height: 35px; 
-    }
-    .container img {
-        width: 70px; 
-        height: auto;
-        border-radius: 21px 21px 0 0;
-        margin-bottom: 20px;
-    }
-    .container h1 {
-        display: inline; 
-    }
-    h4{
-        margin-bottom: 25px;
-    }
+    /* ไม่ต้องเพิ่มสไตล์เพิ่มเติม */
 </style>
 {% endblock %}
-{% block content %}
 
+{% block content %}
 <div class="container">
-    <h1> Report</h1>
-    <img src="https://cdn-icons-png.freepik.com/512/3534/3534063.png?fbclid=IwAR01AFGVbZ5NrYHoyrLGcik573o0UG0hoXk2gmu4aN1ixDR0-NA2GOAXsi0" alt="">
-    <h4>โปรดกรอกปัญหาในการใช้งาน หรือคำแนะนำอื่นๆได้ </h4>
-    <form action="/submit_report" method="post">
-        <textarea name="message" rows="10" cols="50"></textarea><br><br>
-        <button type="submit" value="Submit" class="btn btn-outline-success">Submit</button>
-    </form>
+    <div class="row g-5">
+        <div class="col-md-12">
+            <h4 class="mb-3">Report Form</h4>
+            <form>
+                <div class="form-group">
+                    <label for="name">ชื่อผู้ใช้งาน:</label>
+                    <input type="text" class="form-control" id="name" placeholder="โปรดกรอกชื่อผู้ใช้งาน" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">อีเมลล์:</label>
+                    <input type="email" class="form-control" id="email" placeholder="โปรดกรอกอีเมลล์ผู้ใช้งาน" required>
+                </div>
+                <div class="form-group">
+                    <label for="problems">ปัญหาที่พบ:</label>
+                    <textarea class="form-control" id="problems" rows="3" placeholder="โปรดกรอกปัญหาที่พบ" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="suggestions">ข้อเสนอแนะ:</label>
+                    <textarea class="form-control" id="suggestions" rows="3" placeholder="โปรดกรอกข้อเสนอแนะ" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
