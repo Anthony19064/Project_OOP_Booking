@@ -3,14 +3,13 @@
 {% block style %}
 <style>
     body {
-        background-color: #f8f9fa;
+        background-color: hsl(0, 0%, 100%);
         font-family: Arial, sans-serif;
     }
     .jumbotron {
-        background-image: url('your-image-url.jpg');
         background-size: cover;
         background-position: center;
-        color: #fff;
+        color: #0557f0;
         text-align: center;
         padding: 100px 0;
     }
@@ -20,36 +19,35 @@
     }
     .jumbotron p {
         font-size: 1.5rem;
+        font-weight: bold;
     }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="jumbotron">
-    <h1 class="display-3">Welcome to Our Website</h1>
+    <h1 class="display-3">Welcome to Our Booking</h1>
     <p class="lead">Discover amazing experiences</p>
-    <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+    <a href="/about" class="btn btn-primary btn-lg">About</a>
 </div>
 
 <div class="container py-5">
-    <h2 class="text-center mb-4">Featured Products</h2>
+    <h2 class="text-center mb-4">Featured Booking</h2>
     <div class="row">
         <div class="col-md-6 mb-4">
             <div class="card">
-                <img src="hotel.jpg" class="card-img-top" alt="Hotel">
                 <div class="card-body">
                     <h5 class="card-title">Hotel</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="card-text">Book hotels in various provinces.</p>
                     <button class="btn btn-primary view-details" data-toggle="modal" data-target="#hotelModal">View Details</button>
                 </div>
             </div>
         </div>
         <div class="col-md-6 mb-4">
-            <div class="card">
-                <img src="/img_index/taxi2.jpg" class="card-img-top" alt="Taxi">                           
+            <div class="card">                         
                 <div class="card-body">
                     <h5 class="card-title">Taxi</h5>
-                    <p class="card-text">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="card-text">Book a taxi in various provinces.</p>
                     <button class="btn btn-primary view-details" data-toggle="modal" data-target="#taxiModal">View Details</button>
                 </div>
             </div>
@@ -68,7 +66,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Hotel details will be displayed here.</p>
+                <p>It is a hotel reservation that is more convenient than booking at the location.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
