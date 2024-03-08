@@ -136,7 +136,6 @@ def hotel_page(hotel_name):
 @app.route('/taxi/<taxi_name>')
 def taxi_page(taxi_name):
     folder_name = globals()[taxi_name.upper().replace(" ", "_")]
-    print('กุยุนี่',taxi_name)
     images = os.listdir(folder_name)
     taxi = control.seach_taxi(taxi_name)
     car = taxi.seach_available_car
