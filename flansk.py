@@ -40,7 +40,9 @@ STAR_CONVENTION = 'room_starconventionhotel'
 THE_BLANKET = 'room_theblankethotel'
 THE_OPIUM = 'room_theopium'
 THE_QUARTIER = 'room_thequeartierhotel'
-
+TAXI_COMPANY = 'car_taxicompany'
+TAXI_SIAM_INTER_COMPANY = 'car_taxisiamintercompany'
+TAXI_BANGKOK = 'car_taxibangkok'
 
 @app.route('/images/<path:folder>/<path:image_name>')
 def get_image(folder, image_name):
