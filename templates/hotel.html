@@ -37,7 +37,7 @@
                 <img class="card-img-top" src="{{ url_for('get_image',folder='hotel', image_name=images[i]) }}" style="width:100%" alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">{{ hotels[i].get_name }}</h4>
-                    <p class="card-text">This hotel is located in <b>{{ hotels[i].get_location }}</b>.</p>
+                    <p class="card-text">โรงแรมนี้ตั้งอยู่ในจังหวัด <b>{{ hotels[i].get_location }}</b></p>
                 </div>
                 <div class="card-footer">
                     <a href="{{ url_for('hotel_page', hotel_name=hotels[i].get_name) }}" class="btn btn-dark">View more</a>
