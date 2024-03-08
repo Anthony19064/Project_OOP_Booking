@@ -97,13 +97,19 @@ def process_form_data():
         hotel_list.sort(key=lambda x: x._Hotel__name)
         images = os.listdir(IMAGE_FOLDER_HOTEL)
         return render_template('hotel.html',hotels=hotel_list, images=images)
-    else:
+    elif location != '':
         for i in range(len(location_list_thai)):
-            if location == location_list_thai[i] or location == location_list_eng[i]:
+            if location == location_list_thai[i]:
                 hotel_list = control.seach_hotel_from_location(location)
                 hotel_list.sort(key=lambda x: x._Hotel__name)
                 images = os.listdir(folder_list[i])
                 return render_template('hotel.html',hotels=hotel_list, images=images)
+    else:
+        hotel_list = []
+        images = []
+        return render_template('hotel.html',hotels=hotel_list, images=images)
+
+            
 
 @app.route('/taxi')
 def Taxipage():
