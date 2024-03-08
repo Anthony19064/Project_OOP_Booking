@@ -122,7 +122,7 @@ def register():
 
 #--------------------------Hotel-----------------------------------------------------------
 
-@app.route('/<hotel_name>')
+@app.route('/hotel/<hotel_name>')
 def hotel_page(hotel_name):
     folder_name = globals()[hotel_name.upper().replace(" ", "_")]
     images = os.listdir(folder_name)
@@ -130,13 +130,17 @@ def hotel_page(hotel_name):
     room_list = hotel.search_available_room
     return render_template(f'{hotel_name}.html', rooms=room_list, images=images, hotels=hotel)
 
-@app.route('/<taxi_name>')
+#--------------------------Taxi-----------------------------------------------------------
+
+@app.route('/taxi/<taxi_name>')
 def taxi_page(taxi_name):
     folder_name = globals()[taxi_name.upper().replace(" ", "_")]
     images = os.listdir(folder_name)
     taxi = control.seach_taxi(taxi_name)
     car = taxi.seach_available_car
     return render_template(f'{taxi_name}.html', cars=car, images=images, taxis=taxi)
+
+#--------------------------Test-----------------------------------------------------------
 
 @app.route('/testdata')
 def test_get_data():
@@ -148,6 +152,7 @@ def test_get_data():
         return render_template('login.html')
     else:
         return render_template('testdata.html', hotel=hotels, room=rooms)
+    
 
 #----------------------------------------------------------------------------------------------
 
