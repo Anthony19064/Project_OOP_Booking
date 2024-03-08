@@ -82,22 +82,24 @@ def Hotelpage():
 
 @app.route('/process_form_data', methods=['POST'])
 def process_form_data():
-    location_list = ['กรุงเทพ', 'เชียงใหม่', 'ชลบุรี', 'ภูเก็ต', 'ขอนแก่น', 'ระยอง']
+    location_list_thai = ['กรุงเทพ', 'เชียงใหม่', 'ชลบุรี', 'ภูเก็ต', 'ขอนแก่น', 'ระยอง']
+    location_list_eng = ['bangkok', 'chiang mai', 'chonburi', 'khon kaen', 'phuket', 'rayong']
     folder_list = [IMAGE_FOLDER_HOTEL_BANGKOK, IMAGE_FOLDER_HOTEL_CHIANG_MAI, IMAGE_FOLDER_HOTEL_CHONBURI,
                    IMAGE_FOLDER_HOTEL_PHUKET,  IMAGE_FOLDER_HOTEL_KHON_KAEN, IMAGE_FOLDER_HOTEL_RAYONG]
-
+    
     location = request.form['Location']
     location.lower
     adult = request.form['Adult']
     date = request.form['date']
-    images = os.listdir(IMAGE_FOLDER_HOTEL)
+    
     if location == '':
         hotel_list = control.get_hotel_list
         hotel_list.sort(key=lambda x: x._Hotel__name)
+        images = os.listdir(IMAGE_FOLDER_HOTEL)
         return render_template('hotel.html',hotels=hotel_list, images=images)
     else:
-        for i in range(len(location_list)):
-            if location == location_list[i]:
+        for i in range(len(location_list_thai)):
+            if location == location_list_thai[i] or location == location_list_eng[i]:
                 hotel_list = control.seach_hotel_from_location(location)
                 hotel_list.sort(key=lambda x: x._Hotel__name)
                 images = os.listdir(folder_list[i])
