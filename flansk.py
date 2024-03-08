@@ -4,7 +4,7 @@ import os
 
 
 creat_instance()
-
+print('')
 app = Flask(__name__)
 app.secret_key = 'booking'
 hotel_list = control.get_hotel_list
