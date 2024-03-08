@@ -128,15 +128,24 @@ def hotel_page(hotel_name):
     room_list = hotel.search_available_room
     return render_template(f'{hotel_name}.html', rooms=room_list, images=images, hotels=hotel)
 
+@app.route('/<taxi_name>')
+def taxi_page(taxi_name):
+    folder_name = globals()[taxi_name.upper().replace(" ", "_")]
+    images = os.listdir(folder_name)
+    taxi = control.seach_taxi(taxi_name)
+    car = taxi.seach_available_car
+    return render_template(f'{taxi_name}.html', cars=car, images=images, taxis=taxi)
+
 @app.route('/testdata')
 def test_get_data():
     hotel = request.args.get('hotel')
     room = request.args.get('room')
     hotels = control.seach_hotel_from_name(hotel)
     rooms = hotels.search_room(int(room))
-
-
-    return render_template('testdata.html', hotel=hotels, room=rooms)
+    if session.get('username') is None:
+        return render_template('login.html')
+    else:
+        return render_template('testdata.html', hotel=hotels, room=rooms)
 
 #----------------------------------------------------------------------------------------------
 
