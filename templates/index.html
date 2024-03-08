@@ -1,97 +1,101 @@
-{% extends "layout.html" %}
-
-{% block style %}
+{% extends "layout.html" %} {% block style %}
 <style>
-    body {
-        background-color: hsl(0, 0%, 100%);
-        font-family: Arial, sans-serif;
-    }
-    .jumbotron {
-        background-size: cover;
-        background-position: center;
-        color: black;
-        text-align: center;
-        padding: 100px 0;
-    }
-    .jumbotron h1 {
-        font-size: 3rem;
-        font-weight: bold;
-    }
-    .jumbotron p {
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
+  body {
+    background-color: hsl(0, 0%, 91%);
+    font-family: Arial, sans-serif;
+  }
+  .jumbotron {
+    background-size: cover;
+    background-position: left;
+    color: white;
+    text-align: left;
+    padding: 200px 0;
+    background-image: url(https://www.pixelstalk.net/wp-content/uploads/images6/Free-download-4K-Travel-Wallpaper-HD.jpg);
+    opacity: 1;
+    font-family: sans;
+  }
+  .jumbotron h1 {
+    font-size: 4rem;
+    font-weight: bold;
+  }
+  .jumbotron p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .indent1 {
+    text-indent: 50px;
+  }
+  .jumbotron1 {
+    background-color: black;
+    font-family: sans;
+  }
+  .text1 {
+    font-family: sans;
+    border-radius: 20px;
+  }
+  .text2 {
+    font-family: sans;
+    color: aliceblue;
+    border-radius: 25px;
+  }
 </style>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="jumbotron">
-    <h1 class="display-3">Welcome to Our Booking</h1>
-    <p class="lead">Discover amazing experiences</p>
-    <a href="/about" class="btn btn-primary btn-lg">About</a>
+  <!-- <a href="/about" class="btn btn-primary btn-lg jus">About</a> -->
+  <h1 class="display-3 indent1">Welcome to Our Booking</h1>
+  <p class="lead indent1">Discover amazing experiences</p>
 </div>
 
-<div class="container py-5">
-    <h2 class="text-center mb-4">Featured Booking</h2>
-    <div class="row">
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Hotel</h5>
-                    <p class="card-text">Book hotels in various provinces.</p>
-                    <button class="btn btn-primary view-details" data-toggle="modal" data-target="#hotelModal">View Details</button>
-                </div>
-            </div>
+<div class="container py-4">
+  <h2 class="text-Left mb-5">Enjoin your Booking</h2>
+
+  <div class="row text1">
+    <div class="col-md-4 mb-3">
+      <div class="card text1">
+        <div class="card-body">
+          <h5 class="card-title">Hotel</h5>
+          <p class="card-text">Book hotels in various provinces.</p>
+          <button
+            class="btn btn-primary view-details jumbotron1"
+            data-toggle="modal"
+            data-target="#hotelModal"
+          >
+            <a href="hotel" class="text2"> View Details</a>
+          </button>
         </div>
-        <div class="col-md-6 mb-4">
-            <div class="card">                         
-                <div class="card-body">
-                    <h5 class="card-title">Taxi</h5>
-                    <p class="card-text">Book a taxi in various provinces.</p>
-                    <button class="btn btn-primary view-details" data-toggle="modal" data-target="#taxiModal">View Details</button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-md-4 mb-3 text1">
+      <div class="card text1">
+        <div class="card-body">
+          <h5 class="card-title">Taxi</h5>
+          <p class="card-text">Book a taxi in various provinces.</p>
+          <abutton
+            class="btn btn-primary view-details jumbotron1"
+            data-toggle="modal"
+            data-target="#taxiModal"
+          >
+            <a href="taxi" class="text2"> View Details</a>
+          </abutton>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3 text1">
+      <div class="card text1">
+        <div class="card-body">
+          <h5 class="card-title">About</h5>
+          <p class="card-text">Who we are let know about artists Contract.</p>
+          <button
+            class="btn btn-primary view-details jumbotron1"
+            data-toggle="modal"
+            data-target="#hotelModal"
+          >
+            <a href="about" class="text2"> View Details</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Hotel Modal -->
-<div class="modal fade" id="hotelModal" tabindex="-1" aria-labelledby="hotelModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="hotelModalLabel">Hotel Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>It is a hotel reservation that is more convenient than booking at the location.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Taxi Modal -->
-<div class="modal fade" id="taxiModal" tabindex="-1" aria-labelledby="taxiModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taxiModalLabel">Taxi Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Taxi details will be displayed here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
