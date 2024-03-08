@@ -2,7 +2,6 @@
 <style>
   body {
     background-color: hsl(0, 0%, 91%);
-    font-family: Arial, sans-serif;
   }
   .jumbotron {
     background-size: cover;
@@ -27,14 +26,12 @@
   }
   .jumbotron1 {
     background-color: black;
-    font-family: sans;
+
   }
   .text1 {
-    font-family: sans;
     border-radius: 20px;
   }
   .text2 {
-    font-family: sans;
     color: aliceblue;
     border-radius: 25px;
   }
@@ -53,45 +50,27 @@
     <div class="col-md-4 mb-3">
       <div class="card text1">
         <div class="card-body">
-          <h5 class="card-title">Hotel</h5>
+          <h4 class="card-title">Hotel</h4>
           <p class="card-text">Book hotels in various provinces.</p>
-          <button
-            class="btn btn-primary view-details jumbotron1"
-            data-toggle="modal"
-            data-target="#hotelModal"
-          >
-            <a href="hotel" class="text2"> View Details</a>
-          </button>
+          <a href="{{ url_for('Taxipage') }}"class="btn btn-dark">View Details</a>
         </div>
       </div>
     </div>
     <div class="col-md-4 mb-3 text1">
       <div class="card text1">
         <div class="card-body">
-          <h5 class="card-title">Taxi</h5>
+          <h4 class="card-title">Taxi</h4>
           <p class="card-text">Book a taxi in various provinces.</p>
-          <abutton
-            class="btn btn-primary view-details jumbotron1"
-            data-toggle="modal"
-            data-target="#taxiModal"
-          >
-            <a href="taxi" class="text2"> View Details</a>
-          </abutton>
+          <a href="{{ url_for('Aboutpage') }}"class="btn btn-dark">View Details</a>
         </div>
       </div>
     </div>
     <div class="col-md-4 mb-3 text1">
       <div class="card text1">
         <div class="card-body">
-          <h5 class="card-title">About</h5>
+          <h4 class="card-title">About</h4>
           <p class="card-text">Who we are let know about artists Contract.</p>
-          <button
-            class="btn btn-primary view-details jumbotron1"
-            data-toggle="modal"
-            data-target="#hotelModal"
-          >
-            <a href="about" class="text2"> View Details</a>
-          </button>
+          <a href="{{ url_for('Aboutpage') }}"class="btn btn-dark">View Details</a>
         </div>
       </div>
     </div>
