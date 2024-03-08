@@ -40,7 +40,7 @@
                     <p class="card-text">This taxi company is by  <b> {{ taxis[i].get_name }} </b>.</p>
                 </div>
                 <div class="card-footer">
-                    <a href="/{{ taxis[i].get_name }}" class="btn btn-dark">View more</a>
+                    <a href="{{ url_for('taxi_page', taxi_name=taxis[i].get_name) }}" class="btn btn-dark">View more</a>
                 </div>
             </div>
         </div>

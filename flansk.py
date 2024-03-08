@@ -10,6 +10,7 @@ app.secret_key = 'booking'
 hotel_list = control.get_hotel_list
 hotel_list.sort(key=lambda x: x._Hotel__name)
 taxi_list = control.get_taxi_list
+taxi_list.sort(key=lambda x: x._Taxi__name)
 account_list = control.get_account_list
 
 
@@ -40,21 +41,23 @@ STAR_CONVENTION = 'room_starconventionhotel'
 THE_BLANKET = 'room_theblankethotel'
 THE_OPIUM = 'room_theopium'
 THE_QUARTIER = 'room_thequeartierhotel'
-
+TAXI_COMPANY = 'car_taxicompany'
+TAXI_SIAM_INTER_COMPANY = 'car_taxisiamintercompany'
+TAXI_BANGKOK = 'car_taxibangkok'
 
 @app.route('/images/<path:folder>/<path:image_name>')
 def get_image(folder, image_name):
     list_input = ["hotel", "taxi", 'Amora Thapae','Baiyoke Sky', 'Bangsean', 'Blu Monkey', 'Blue Carina', 'Centara Chiang Mai', 'Citadines Grand Central',
                   'Glory Boutique', 'Hotel Fuse Rayong', 'Karin', 'Le cassia', 'Lit Bangkok', 'Madera Residence', 'Nadee 10', 'Novotel Rayong Star Centre', 
                   'Oakwood', 'Phavina Hotel Rayong', 'Romantic', 'Seabed Grand', 'Sirin', 'Star Convention', 'The Blanket', 'The Opium',
-                  'The Quartier']
+                  'The Quartier', 'Taxi Company', 'Taxi Siam inter Company', 'Taxi bangkok']
     list_folder = [IMAGE_FOLDER_HOTEL, IMAGE_FOLDER_TAXI, AMORA_THAPAE, BAIYOKE_SKY, BANGSEAN, BLU_MONKEY, BLUE_CARINA, CENTARA_CHIANG_MAI, CITADINES_GRAND_CENTRAL, 
                    GLORY_BOUTIQUE, HOTEL_FUSE_RAYONG, KARIN, LE_CASSIA, LIT_BANGKOK, MADERA_RESIDENCE, NADEE_10, NOVOTEL_RAYONG_STAR_CENTRE, OAKWOOD,
-                   PHAVINA_HOTEL_RAYONG, ROMANTIC, SEABED_GRAND, SIRIN, STAR_CONVENTION, THE_BLANKET, THE_OPIUM, THE_QUARTIER]
+                   PHAVINA_HOTEL_RAYONG, ROMANTIC, SEABED_GRAND, SIRIN, STAR_CONVENTION, THE_BLANKET, THE_OPIUM, THE_QUARTIER, TAXI_COMPANY, TAXI_SIAM_INTER_COMPANY,
+                   TAXI_BANGKOK]
     folder = str(folder)
 
     for i in range(len(list_folder)):
-
         if folder == list_input[i]:
             return send_from_directory(list_folder[i], image_name)
 
@@ -120,7 +123,7 @@ def register():
 
 #--------------------------Hotel-----------------------------------------------------------
 
-@app.route('/<hotel_name>')
+@app.route('/hotel/<hotel_name>')
 def hotel_page(hotel_name):
     folder_name = globals()[hotel_name.upper().replace(" ", "_")]
     images = os.listdir(folder_name)
@@ -128,15 +131,29 @@ def hotel_page(hotel_name):
     room_list = hotel.search_available_room
     return render_template(f'{hotel_name}.html', rooms=room_list, images=images, hotels=hotel)
 
+#--------------------------Taxi-----------------------------------------------------------
+
+@app.route('/taxi/<taxi_name>')
+def taxi_page(taxi_name):
+    folder_name = globals()[taxi_name.upper().replace(" ", "_")]
+    images = os.listdir(folder_name)
+    taxi = control.seach_taxi(taxi_name)
+    car = taxi.seach_available_car
+    return render_template(f'{taxi_name}.html', cars=car, images=images, taxis=taxi)
+
+#--------------------------Test-----------------------------------------------------------
+
 @app.route('/testdata')
 def test_get_data():
     hotel = request.args.get('hotel')
     room = request.args.get('room')
     hotels = control.seach_hotel_from_name(hotel)
     rooms = hotels.search_room(int(room))
-
-
-    return render_template('testdata.html', hotel=hotels, room=rooms)
+    if session.get('username') is None:
+        return render_template('login.html')
+    else:
+        return render_template('testdata.html', hotel=hotels, room=rooms)
+    
 
 #----------------------------------------------------------------------------------------------
 
