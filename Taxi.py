@@ -87,8 +87,13 @@ class Car:
 class Seadard(Car):
     def __init__(self, phone_number, head_count, price):
         Car.__init__(self, phone_number)
+        self.__car_type = "Seadard"
         self.__head_count = head_count
         self.__price = price
+
+    @property
+    def get_car_type(self):
+        return self.__car_type
 
     @property
     def get_head_count (self):
@@ -101,8 +106,13 @@ class Seadard(Car):
 class Suv(Car):
     def __init__(self, phone_number, head_count, price):
         Car.__init__(self, phone_number)
+        self.__car_type = "Suv"
         self.__head_count = head_count
         self.__price = price
+
+    @property
+    def get_car_type(self):
+        return self.__car_type
 
     @property
     def get_head_count (self):
@@ -115,8 +125,13 @@ class Suv(Car):
 class Private(Car):
     def __init__(self, phone_number, head_count, price):
         Car.__init__(self, phone_number)
+        self.__car_type = "Private"
         self.__head_count = head_count
         self.__price = price
+
+    @property
+    def get_car_type(self):
+        return self.__car_type
 
     @property
     def get_head_count (self):
