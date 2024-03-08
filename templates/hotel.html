@@ -28,20 +28,24 @@
 {% endblock %}
 
 {% block content %} 
-<center><h1>Hotel in Thailand</h1></center>\
-<section class="py-4 text-Left container">
-    <div class="btn-group">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Location" name="Location" >
-    </div>
-    <div class="btn-group">
-      <input type="int" class="form-control" id="floatingInput" placeholder="Adult" name="Adult">
-    </div>
-    <div class="btn-group">
-          <input type="date" id="start" name="date" value="2018-07-22" min="2018-01-01" max="2018-12-31" />
-        </form></button>
-    </div>
-        <button class="btn btn-success btn-md align-items-center justify-content-center" >Search </button>
-  </section>
+<center><h1>Hotel in Thailand</h1></center>
+<center>
+<form action="{{ url_for('process_form_data') }}" method="post">
+    <section class="py-4 text-Left container">
+        <div class="btn-group">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Location" name="Location" >
+        </div>
+        <div class="btn-group">
+            <input type="number" class="form-control" id="floatingInput" placeholder="Adult" name="Adult">
+        </div>
+        <div class="btn-group">
+            <input type="date" id="start" name="date" min="date" max="2030-12-31" />
+        </div>
+        <button type="submit" class="btn btn-success btn-md align-items-center justify-content-center">Search</button>
+    </section>
+</form>
+</center>
+
 <div class="container">
     <div class="row">
         {% for i in range(hotels|length) %}
@@ -60,5 +64,20 @@
         {% endfor %}
     </div>
 </div>
-{% endblock %}
 
+<script>
+// สร้างวัตถุ Date จากวันที่และเวลาปัจจุบัน
+var today = new Date();
+
+// ดึงข้อมูลวันที่ในรูปแบบ YYYY-MM-DD
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //มกราคมคือเดือน 0
+var yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
+// กำหนดค่า value ของ input type="date" เป็นวันที่ปัจจุบัน
+document.getElementById("start").value = today;
+</script>
+
+{% endblock %}
