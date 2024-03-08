@@ -20,11 +20,25 @@
   }
   h1 {
     margin-bottom: 20px;
+    display: inline-flex;
+    font-family: "Impact", sans-serif; 
+    background: url("https://images.unsplash.com/photo-1601529686322-350562cc5d67?q=80&w=2145&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    font-size: 8rem; 
+    background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: #5b728a54; 
+    animation: move 10s linear infinite; 
+    letter-spacing: .3rem;
+    background-position: center 900px; 
   }
+  @keyframes move {
+    from { background-position: 80%; } 
+    to { background-position: 100% 50%; }
+    }
 </style>
 
 {% endblock %} {% block content %}
-<center><h1>Hotel in Thailand</h1></center>
+<center><h1>Hotel in {{ location }}</h1></center>
 <center>
   <form action="{{ url_for('process_form_data') }}" method="post">
     <section class="py-4 text-Left container">
