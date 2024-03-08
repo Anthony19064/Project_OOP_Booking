@@ -78,7 +78,7 @@ def index():
 @app.route('/hotel')
 def Hotelpage():
     images = os.listdir(IMAGE_FOLDER_HOTEL)
-    return render_template('hotel.html',hotels=hotel_list, images=images, location="Thailand")
+    return render_template('hotel.html',hotels=hotel_list, images=images, location="in Thailand")
 
 @app.route('/process_form_data', methods=['POST'])
 def process_form_data():
@@ -97,7 +97,7 @@ def process_form_data():
         hotel_list = control.get_hotel_list
         hotel_list.sort(key=lambda x: x._Hotel__name)
         images = os.listdir(IMAGE_FOLDER_HOTEL)
-        return render_template('hotel.html',hotels=hotel_list, images=images, location="Thailand")
+        return render_template('hotel.html',hotels=hotel_list, images=images, location="in Thailand")
     elif location != '':
         for location_list in all_loca_list:
             for i in range(len(location_list)):
@@ -106,8 +106,8 @@ def process_form_data():
                     hotel_list.sort(key=lambda x: x._Hotel__name)
                     images = os.listdir(folder_list[i])
                     locate = location_list_eng[i]
-                    return render_template('hotel.html',hotels=hotel_list, images=images , location=locate)
-        return render_template('hotel.html',hotels=[], images=[], text="Not Foud")
+                    return render_template('hotel.html',hotels=hotel_list, images=images , location=f'in {locate}')
+        return render_template('hotel.html',hotels=[], images=[], location="Not Foud")
             
 
         

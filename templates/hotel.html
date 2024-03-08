@@ -4,9 +4,7 @@
     height: 200px;
     object-fit: cover;
   }
-  .navbar {
-    margin-bottom: 25px;
-  }
+
   .card {
     height: 100%;
     display: flex;
@@ -38,7 +36,7 @@
 </style>
 
 {% endblock %} {% block content %}
-<center><h1>Hotel in {{ location }}</h1></center>
+<center><h1>Hotel {{ location }}</h1></center>
 <center>
   <form action="{{ url_for('process_form_data') }}" method="post">
     <section class="py-4 text-Left container">
@@ -102,7 +100,6 @@
     {% endfor %}
   </div>
 </div>
-    <center><h1 >{{ text }}</h1></center>
 <script>
   // สร้างวัตถุ Date จากวันที่และเวลาปัจจุบัน
   var today = new Date();
