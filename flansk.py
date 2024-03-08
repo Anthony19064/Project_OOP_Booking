@@ -16,6 +16,12 @@ account_list = control.get_account_list
 
 # กำหนดเส้นทางสำหรับโฟลเดอร์รูปภาพ
 IMAGE_FOLDER_HOTEL = 'hotel'
+IMAGE_FOLDER_HOTEL_BANGKOK = 'hotel_bangkok'
+IMAGE_FOLDER_HOTEL_CHIANG_MAI = 'hotel_chiang_mai'
+IMAGE_FOLDER_HOTEL_CHONBURI = 'hotel_chonburi'
+IMAGE_FOLDER_HOTEL_PHUKET = 'hotel_phuket'
+IMAGE_FOLDER_HOTEL_KHON_KAEN = 'hotel_khon_kaen'
+IMAGE_FOLDER_HOTEL_RAYONG = 'hotel_rayong'
 IMAGE_FOLDER_TAXI = 'taxi'
 AMORA_THAPAE = 'room_amorathapae'
 BAIYOKE_SKY = 'room_baiyokeskyhotel'
@@ -50,11 +56,12 @@ def get_image(folder, image_name):
     list_input = ["hotel", "taxi", 'Amora Thapae','Baiyoke Sky', 'Bangsean', 'Blu Monkey', 'Blue Carina', 'Centara Chiang Mai', 'Citadines Grand Central',
                   'Glory Boutique', 'Hotel Fuse Rayong', 'Karin', 'Le cassia', 'Lit Bangkok', 'Madera Residence', 'Nadee 10', 'Novotel Rayong Star Centre', 
                   'Oakwood', 'Phavina Hotel Rayong', 'Romantic', 'Seabed Grand', 'Sirin', 'Star Convention', 'The Blanket', 'The Opium',
-                  'The Quartier', 'Taxi Company', 'Taxi Siam inter Company', 'Taxi bangkok']
+                  'The Quartier', 'Taxi Company', 'Taxi Siam inter Company', 'Taxi bangkok', 'กรุงเทพ']
     list_folder = [IMAGE_FOLDER_HOTEL, IMAGE_FOLDER_TAXI, AMORA_THAPAE, BAIYOKE_SKY, BANGSEAN, BLU_MONKEY, BLUE_CARINA, CENTARA_CHIANG_MAI, CITADINES_GRAND_CENTRAL, 
                    GLORY_BOUTIQUE, HOTEL_FUSE_RAYONG, KARIN, LE_CASSIA, LIT_BANGKOK, MADERA_RESIDENCE, NADEE_10, NOVOTEL_RAYONG_STAR_CENTRE, OAKWOOD,
                    PHAVINA_HOTEL_RAYONG, ROMANTIC, SEABED_GRAND, SIRIN, STAR_CONVENTION, THE_BLANKET, THE_OPIUM, THE_QUARTIER, TAXI_COMPANY, TAXI_SIAM_INTER_COMPANY,
-                   TAXI_BANGKOK]
+                   TAXI_BANGKOK, IMAGE_FOLDER_HOTEL_BANGKOK, IMAGE_FOLDER_HOTEL_CHIANG_MAI, IMAGE_FOLDER_HOTEL_CHONBURI, IMAGE_FOLDER_HOTEL_PHUKET, IMAGE_FOLDER_HOTEL_KHON_KAEN,
+                   IMAGE_FOLDER_HOTEL_RAYONG]
     folder = str(folder)
 
     for i in range(len(list_folder)):
@@ -73,6 +80,24 @@ def index():
 def Hotelpage():
     images = os.listdir(IMAGE_FOLDER_HOTEL)
     return render_template('hotel.html',hotels=hotel_list, images=images)
+
+@app.route('/process_form_data', methods=['POST'])
+def process_form_data():
+
+    location = request.form['Location']
+    location.lower
+    adult = request.form['Adult']
+    date = request.form['date']
+    images = os.listdir(IMAGE_FOLDER_HOTEL)
+    if location == '':
+        hotel_list = control.get_hotel_list
+        hotel_list.sort(key=lambda x: x._Hotel__name)
+        return render_template('hotel.html',hotels=hotel_list, images=images)
+    elif location == 'กรุงเทพ' or location == 'bangkok':
+        hotel_list = control.seach_hotel_from_location(location)
+        hotel_list.sort(key=lambda x: x._Hotel__name)
+        images = os.listdir(IMAGE_FOLDER_HOTEL_BANGKOK)
+        return render_template('hotel.html',hotels=hotel_list, images=images)
 
 @app.route('/taxi')
 def Taxipage():
@@ -136,7 +161,6 @@ def hotel_page(hotel_name):
 @app.route('/taxi/<taxi_name>')
 def taxi_page(taxi_name):
     folder_name = globals()[taxi_name.upper().replace(" ", "_")]
-    print('กุยุนี่',taxi_name)
     images = os.listdir(folder_name)
     taxi = control.seach_taxi(taxi_name)
     car = taxi.seach_available_car
