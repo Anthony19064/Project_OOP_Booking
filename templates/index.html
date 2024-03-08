@@ -1,4 +1,99 @@
 {% extends "layout.html" %}
-{% block content %} 
-<center><h1> Welcome to Booking Website {{ session['username'] }} </h1></center>
+
+{% block style %}
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+    .jumbotron {
+        background-image: url('your-image-url.jpg');
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        text-align: center;
+        padding: 100px 0;
+    }
+    .jumbotron h1 {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    .jumbotron p {
+        font-size: 1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-3">Welcome to Our Website</h1>
+    <p class="lead">Discover amazing experiences</p>
+    <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+</div>
+
+<div class="container py-5">
+    <h2 class="text-center mb-4">Featured Products</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <img src="hotel.jpg" class="card-img-top" alt="Hotel">
+                <div class="card-body">
+                    <h5 class="card-title">Hotel</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <button class="btn btn-primary view-details" data-toggle="modal" data-target="#hotelModal">View Details</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <img src="/img_index/taxi2.jpg" class="card-img-top" alt="Taxi">                           
+                <div class="card-body">
+                    <h5 class="card-title">Taxi</h5>
+                    <p class="card-text">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <button class="btn btn-primary view-details" data-toggle="modal" data-target="#taxiModal">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hotel Modal -->
+<div class="modal fade" id="hotelModal" tabindex="-1" aria-labelledby="hotelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="hotelModalLabel">Hotel Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Hotel details will be displayed here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Taxi Modal -->
+<div class="modal fade" id="taxiModal" tabindex="-1" aria-labelledby="taxiModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taxiModalLabel">Taxi Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Taxi details will be displayed here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

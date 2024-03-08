@@ -6,7 +6,7 @@ import os
 creat_instance()
 
 app = Flask(__name__)
-app.secret_key = 'booking'  
+app.secret_key = 'booking'
 hotel_list = control.get_hotel_list
 hotel_list.sort(key=lambda x: x._Hotel__name)
 taxi_list = control.get_taxi_list
