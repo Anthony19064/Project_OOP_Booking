@@ -15,9 +15,14 @@ class Hotel:
     def search_available_room(self):
         room_list = []
         for room in self.__room_list:
-            if room.get_date == None:
+            if room.get_date_in == None and room.get_date_out == None:
                 room_list.append(room)
         return room_list
+    
+    def search_room(self, room_number):
+        for room in self.__room_list:
+            if room.get_room_number == room_number:
+                return room
 
     @property
     def get_room_list (self):

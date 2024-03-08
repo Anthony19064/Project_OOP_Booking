@@ -8,8 +8,9 @@ account_list = control.get_account_list
 
 hotel_list.sort(key=lambda x: x._Hotel__name)
 
-for hotel in hotel_list:
-    print(hotel.get_name)
+hotel = control.seach_hotel_from_name("Amora Thapae")
+room = hotel.search_room('801')
+print(room)
 
 # list = control.seach_hotel_from_location('bangkok')
 # print(list)

@@ -125,15 +125,18 @@ def hotel_page(hotel_name):
     folder_name = globals()[hotel_name.upper().replace(" ", "_")]
     images = os.listdir(folder_name)
     hotel = control.seach_hotel_from_name(hotel_name)
-    room_list = hotel.get_room_list
+    room_list = hotel.search_available_room
     return render_template(f'{hotel_name}.html', rooms=room_list, images=images, hotels=hotel)
 
 @app.route('/testdata')
 def test_get_data():
     hotel = request.args.get('hotel')
     room = request.args.get('room')
-    hotel = control.seach_hotel_from_name(hotel)
-    return render_template('testdata.html', hotel=hotel, room=room)
+    hotels = control.seach_hotel_from_name(hotel)
+    rooms = hotels.search_room(int(room))
+
+
+    return render_template('testdata.html', hotel=hotels, room=rooms)
 
 #----------------------------------------------------------------------------------------------
 
