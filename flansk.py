@@ -132,12 +132,10 @@ def login():
 
     if 'username' in session:  # เช็คว่ามี session ของ username หรือไม่
         return redirect(url_for('index'))  # ถ้ามีให้ redirect ไปที่หน้า index
-    print('from login',account_list)
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         for account in account_list:
-            print('from login',account.get_name)
             if username == account.get_name and password == account.get_password:
                 session['username'] = username
                 if 'next' in session:
@@ -171,7 +169,6 @@ def register():
         password = request.form['password']
         mail = request.form['mail']
         phone = request.form['phone']
-        print('from regis'+username, password)
         for account in account_list:
             if username == '' and password == '' and mail == '' and phone == '':
                 return render_template('register.html', popup=True, warning="Please enter your information.")
@@ -193,7 +190,6 @@ def register():
                 return render_template('register.html', popup=True, warning="Your Password too short.")
             else:
                 creat_account(username, password, mail) 
-                print('from regis',account_list)
                 return redirect(url_for('login'))  
     return render_template('register.html')
 
