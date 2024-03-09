@@ -141,7 +141,8 @@ def login():
                     return redirect(session['next'])
                 else:
                     return redirect(url_for('index'))
-        return render_template('login.html')
+        # เมื่อรหัสผ่านผิด ให้ส่งค่าผิดพลาดไปยัง template เพื่อแสดงผล
+        return render_template('login.html', wrong_password=True)
     session['next'] = request.referrer
     return render_template('login.html')
 
