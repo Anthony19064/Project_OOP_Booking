@@ -25,7 +25,9 @@
     }
 
     .text-body-emphasis {
-        color: #007bff;
+        color: black;
+        font-family: sans;
+        margin-bottom: 20;
     }
     .container-fluid {
     max-height: 200px;
@@ -34,17 +36,28 @@
     .container-fluid .container {
         flex-grow: 1;
     }
+    .pading1{
+        padding: 1cm 2cm;
 
+    }
+    .pading2{
+        padding: 4cm 3cm;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
+<div class="cpntainer pading1 ">
+    <a href="{{ url_for('Aboutpage') }}"class="btn btn-dark text2">Contract Admin</a>
+    <a href="{{ url_for('Aboutpage') }}"class="btn btn-dark text2">Feedback</a>
+    <a href="{{ url_for('Aboutpage') }}"class="btn btn-dark text2"> Edit Profile</a>
+</div>
 <div class="container">
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         <div class="feature col">
-            <h3 class="fs-2 text-body-emphasis">Report a Problem</h3>
-            <p>If you encounter any issues or have any suggestions for improvement, please let us know by filling out the form below.</p>
-            <form action="/submit_report" method="post">
+            <h3 class="fs-3text-body-emphasis">Contact With Us</h3>
+            <p>Our website's help center is happy to serve everyone who comes to use our services and improve and improve them. If you have any knowledge, please let us know. We will fix the problem as quickly as possible.</p>
+            <!-- <form action="/submit_report" method="post">
                 <div class="mb-3">
                     <label for="problem-description" class="form-label">Problem Description</label>
                     <textarea class="form-control" id="problem-description" rows="4" name="problem-description" required></textarea>
@@ -54,19 +67,17 @@
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </form> -->
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <p class="text-center">Thank you for using our website</p>
+            <p class="text-center pading2">Thank you for using our website</p>
         </div>
     </div>
 </div>
 
-    
-
-<div class="container-fluid py-3" style="background-color: #353a40ea;">
+<div class="container-fluid py-3 pading1" style="background-color: #353a40ea;">
   <div class="container ">
       <ul class="nav justify-content-center navbar-dark">
           <li class="nav-item">
