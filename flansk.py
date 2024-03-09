@@ -10,6 +10,7 @@ hotel_list = control.get_hotel_list
 hotel_list.sort(key=lambda x: x._Hotel__name)
 taxi_list = control.get_taxi_list
 taxi_list.sort(key=lambda x: x._Taxi__name)
+account_list = control.get_account_list
 
 
 
@@ -128,14 +129,15 @@ def Aboutpage():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    account_list = control.get_account_list
+
     if 'username' in session:  # เช็คว่ามี session ของ username หรือไม่
         return redirect(url_for('index'))  # ถ้ามีให้ redirect ไปที่หน้า index
-
+    print('from login',account_list)
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         for account in account_list:
+            print('from login',account.get_name)
             if username == account.get_name and password == account.get_password:
                 session['username'] = username
                 if 'next' in session:
@@ -150,12 +152,7 @@ def login():
                 return render_template('login.html', popup=True , warning="Please enter your Username.")
             elif password == '':
                 return render_template('login.html', popup=True , warning="Please enter your Password.")
-            elif username == account.get_name and password != account.get_password:
-                return render_template('login.html', popup=True , warning="Password wrong  Pleas try agin.")
-            elif username != account.get_name and password == account.get_password:
-                return render_template('login.html', popup=True , warning="Username wrong  Pleas try agin.")
-            else:
-                return render_template('login.html', popup=True , warning="We couldn't find your account information in the system.")
+
     session['next'] = request.referrer
     return render_template('login.html')
 
@@ -169,13 +166,12 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    account_list = control.get_account_list
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         mail = request.form['mail']
         phone = request.form['phone']
-        print(username)
+        print('from regis'+username, password)
         for account in account_list:
             if username == '' and password == '' and mail == '' and phone == '':
                 return render_template('register.html', popup=True, warning="Please enter your information.")
@@ -195,11 +191,9 @@ def register():
                 return render_template('register.html', popup=True, warning="Your Username too short.")
             elif len(password) < 4:
                 return render_template('register.html', popup=True, warning="Your Password too short.")
-            
-            
-
             else:
                 creat_account(username, password, mail) 
+                print('from regis',account_list)
                 return redirect(url_for('login'))  
     return render_template('register.html')
 
