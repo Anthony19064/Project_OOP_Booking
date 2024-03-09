@@ -155,7 +155,7 @@ def login():
             elif username != account.get_name and password == account.get_password:
                 return render_template('login.html', popup=True , warning="Username wrong  Pleas try agin.")
             else:
-                return render_template('login.html', popup=True , warning="We couldn't find your account in the system. Please try again.")
+                return render_template('login.html', popup=True , warning="We couldn't find your account information in the system.")
     session['next'] = request.referrer
     return render_template('login.html')
 
@@ -195,6 +195,9 @@ def register():
                 return render_template('register.html', popup=True, warning="Your Username too short.")
             elif len(password) < 4:
                 return render_template('register.html', popup=True, warning="Your Password too short.")
+            
+            
+
             else:
                 creat_account(username, password, mail) 
                 return redirect(url_for('login'))  
