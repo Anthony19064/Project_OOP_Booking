@@ -1,15 +1,70 @@
-{% extends "layout.html" %}
-
-{% block style %}
+{% extends "layout.html" %} {% block style %}
 <style>
+  body {
+    background-color: hsl(0, 0%, 91%);
+  }
+  .jumbotron {
+    background-size: cover;
+    background-position: left;
+    color: white;
+    text-align: left;
+    padding: 200px 0;
+    background-image: url(https://www.pixelstalk.net/wp-content/uploads/images8/4k-Wallpaper-HD.jpg);
+    opacity: 1;
 
+  }
+  .jumbotron h1 {
+    font-size: 4rem;
+    font-weight: bold;
+  }
+  .jumbotron p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .indent1 {
+    text-indent: 50px;
+  }
+  .jumbotron1 {
+    background-color: black;
+
+  }
+  .text1 {
+    border-radius: 20px;
+  }
+  .text2 {
+    color: aliceblue;
+    font-family: sans;
+    border-radius: 25px;
+  }
+  .h3 {
+  font-size: 72px;
+  font-weight: bold;
+  background: linear-gradient( 55deg, #00ebfc, rgb(0, 37, 248));
+  background-size: 40%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  animation: gradient 5s infinite;
+
+  }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
 </style>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
+<div class="jumbotron">
+  <!-- <a href="/about" class="btn btn-primary btn-lg jus">About</a> -->
+  <h3 class="display-3 indent1 h3">About us</h1>
+  <p class="lead indent1 h3">Hotel and taxi booking >>> Streamlining travel.</p>
+</div>
 
 <div class="container px-4 py-5" id="about-us">
-    <h2 class="pb-2 border-bottom">About Us</h2>
+    <h2 class="pb-2 border-bottom">About</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         <div class="feature col">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
@@ -35,28 +90,9 @@
     </div>
     <div class="row">
         <div class="col">
-            <p class="text-center">Thank you for useing my web</p>
+            <p class="text-center" style="font-size: large;">Thank you for useing my web</p>
+            <p class="text-center" style="font-size: xx-large;"> example@example.com</p>
         </div>
     </div>
-</div>
-
-<div class="container-fluid py-3" style="background-color: #353a40ea;">
-  <div class="container px-3">
-      <ul class="nav justify-content-center navbar-dark">
-          <li class="nav-item">
-              <a class="nav-link active" aria-current="page"  href="#" style="color: rgb(255, 255, 255);">Contact</a>
-          </li>
-          <li class="nav-item">
-              <!-- <a class="nav-link" href="#">Contact</a> -->
-          </li>
-      </ul>
-      <div class="row">
-          <div class="col-md-12">
-              <p class="text-center text-white">เบอร์โทร: 080-123-4567</p>
-              <p class="text-center text-white">อีเมล์: example@example.com</p>
-          </div>
-      </div>
-  </div>
-</div>
 
 {% endblock %}
