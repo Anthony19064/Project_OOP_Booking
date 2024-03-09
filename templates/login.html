@@ -7,22 +7,27 @@
     <link rel="shortcut icon" type="image/x-icon" href="https://play-lh.googleusercontent.com/eJuvWSnbPwEWAQCYwl8i9nPJXRzTv94JSYGGrKIu0qeuG_5wgYtb982-2F_jOGtIytY">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>    
-        .gradient-custom {
-            /* fallback for old browsers */
-            background: #6a11cb;
-
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
         }
+
         html, body, .vh-100 {
             height: 100%;
+            margin: 0;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
+    <video autoplay loop muted class="video-background">
+        <source src="{{ url_for('static', filename='background_login.mp4') }}" type="video/mp4">
+    </video>
+    
     <section class="vh-100 gradient-custom">
         
         <div class="container py-5 h-100">
@@ -30,7 +35,7 @@
             <div class="row d-flex justify-content-center align-items-center h-100">
                 
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    {% if wrong_password %}
+                    {% if alret_warn %}
                      <center> 
                         <div class="alert alert-danger" role="alert">
                             Wrong Password or Username <br>Please try again.

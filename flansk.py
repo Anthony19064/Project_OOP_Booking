@@ -144,7 +144,7 @@ def login():
                 else:
                     return redirect(url_for('index'))
         # เมื่อรหัสผ่านผิด ให้ส่งค่าผิดพลาดไปยัง template เพื่อแสดงผล
-        return render_template('login.html', wrong_password=True)
+        return render_template('login.html', alret_warn=True)
     session['next'] = request.referrer
     return render_template('login.html')
 
@@ -164,9 +164,10 @@ def register():
         mail = request.form['mail']
         for account in account_list:
             if username == account.get_name:
-                return 'Username already exists!'
+                return render_template('register.html', alret_already=True)
             elif 'admin' in username:
-                return 'Username cannot use'
+                return render_template('register.html', alret_warn=True)
+
             else:
                 creat_account(username, password, mail) 
                 return redirect(url_for('login'))  
