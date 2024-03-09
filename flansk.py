@@ -10,7 +10,7 @@ hotel_list = control.get_hotel_list
 hotel_list.sort(key=lambda x: x._Hotel__name)
 taxi_list = control.get_taxi_list
 taxi_list.sort(key=lambda x: x._Taxi__name)
-account_list = control.get_account_list
+
 
 
 # กำหนดเส้นทางสำหรับโฟลเดอร์รูปภาพ
@@ -128,6 +128,7 @@ def Aboutpage():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    account_list = control.get_account_list
     if 'username' in session:  # เช็คว่ามี session ของ username หรือไม่
         return redirect(url_for('index'))  # ถ้ามีให้ redirect ไปที่หน้า index
 
@@ -143,8 +144,18 @@ def login():
                     return redirect(session['next'])
                 else:
                     return redirect(url_for('index'))
-        # เมื่อรหัสผ่านผิด ให้ส่งค่าผิดพลาดไปยัง template เพื่อแสดงผล
-        return render_template('login.html', alret_warn=True)
+            elif username == '' and password == '':
+                return render_template('login.html', popup=True , warning="Please enter your Username and Password.")
+            elif username == '':
+                return render_template('login.html', popup=True , warning="Please enter your Username.")
+            elif username == '':
+                return render_template('login.html', popup=True , warning="Please enter your Password.")
+            elif username == account.get_name and password != account.get_password:
+                return render_template('login.html', popup=True , warning="Password wrong  Pleas try agin.")
+            elif username != account.get_name and password == account.get_password:
+                return render_template('login.html', popup=True , warning="Username wrong  Pleas try agin.")
+            else:
+                return render_template('login.html', popup=True , warning="We couldn't find your account in the system. Please try again.")
     session['next'] = request.referrer
     return render_template('login.html')
 
@@ -158,15 +169,34 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    account_list = control.get_account_list
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         mail = request.form['mail']
+        phone = request.form['phone']
+        print(username)
         for account in account_list:
-            if username == account.get_name:
-                return render_template('register.html', alret_already=True)
+            if username == '' and password == '' and mail == '' and phone == '':
+                return render_template('register.html', popup=True, warning="Please enter your information.")
+            elif username == '':
+                return render_template('register.html', popup=True, warning="Please enter your Username.")
+            elif password == '':
+                return render_template('register.html', popup=True, warning="Please enter your Password.")
+            elif mail == '':
+                return render_template('register.html', popup=True, warning="Please enter your Mail.")
+            elif phone == '':
+                return render_template('register.html', popup=True, warning="Please enter your Phone.")
+            elif username == account.get_name:
+                return render_template('register.html', popup=True, warning="This Username already in use.")
             elif 'admin' in username:
-                return render_template('register.html', alret_warn=True)
+                return render_template('register.html', popup=True, warning="This Username can't use.")
+            elif len(username) < 4:
+                return render_template('register.html', popup=True, warning="Your Username too short.")
+            elif len(password) < 4:
+                return render_template('register.html', popup=True, warning="Your Password too short.")
+            
+            
 
             else:
                 creat_account(username, password, mail) 
