@@ -59,9 +59,10 @@ class Control:
 
         
 class Account:
-    def __init__(self, name, password):
+    def __init__(self, name, password, mail):
         self.__name = name
         self.__password = password
+        self.__mail = mail
         self.__transaction = []
     
     @property    
@@ -72,13 +73,17 @@ class Account:
     def get_password(self):
         return self.__password
     
+    @property
+    def get_mail(self):
+        return self.__mail
+    
     def add_transaction (self, transaction):
         self.__transaction.append(transaction)
         return self
     
 class Admin(Account):
-    def __init__(self, name, password):
-        Account.__init__(self, name, password)
+    def __init__(self, name, password, mail):
+        Account.__init__(self, name, password, mail)
         self.__permisstion = "Root"
 
     @property
@@ -86,8 +91,8 @@ class Admin(Account):
         return self.__permisstion
 
 class User(Account):
-    def __init__(self, name, password):
-        Account.__init__(self, name, password)
+    def __init__(self, name, password, mail):
+        Account.__init__(self, name, password, mail)
         self.__permisstion = "User"
 
     @property

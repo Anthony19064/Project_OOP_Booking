@@ -109,11 +109,6 @@ def process_form_data():
                     return render_template('hotel.html',hotels=hotel_list, images=images , location=f'in {locate}')
         return render_template('hotel.html',hotels=[], images=[], location="Not Foud")
             
-
-        
-
-            
-
 @app.route('/taxi')
 def Taxipage():
     images = os.listdir(IMAGE_FOLDER_TAXI)
@@ -131,31 +126,46 @@ def Aboutpage():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if 'username' in session:  # เช็คว่ามี session ของ username หรือไม่
+        return redirect(url_for('index'))  # ถ้ามีให้ redirect ไปที่หน้า index
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         for account in account_list:
             if username == account.get_name and password == account.get_password:
                 session['username'] = username
-                return redirect(url_for('index'))
-        return render_template('login.html') 
+                if 'next' in session:
+                    if session['next'] == 'http://127.0.0.1:5000/register':
+                        return render_template('index.html')
+                    return redirect(session['next'])
+                else:
+                    return redirect(url_for('index'))
+        return render_template('login.html')
+    session['next'] = request.referrer
     return render_template('login.html')
+
+
 
 @app.route('/logout')
 def logout():
+    session['next'] = request.referrer
     session.pop('username', None)
-    return redirect(url_for('index'))
+    return redirect(session['next'] if 'next' in session else url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        mail = request.form['mail']
         for account in account_list:
             if username == account.get_name:
                 return 'Username already exists!'
+            elif 'admin' in username:
+                return 'Username cannot use'
             else:
-                creat_account(username, password) 
+                creat_account(username, password, mail) 
                 return redirect(url_for('login'))  
     return render_template('register.html')
 
@@ -190,7 +200,7 @@ def test_get_data():
     hotels = control.seach_hotel_from_name(hotel)
     rooms = hotels.search_room(int(room))
     if session.get('username') is None:
-        return render_template('login.html')
+        return redirect(url_for('login'))
     else:
         return render_template('testdata.html', hotel=hotels, room=rooms)
     

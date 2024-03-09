@@ -133,12 +133,12 @@ def creat_instance():
     control.add_taxi(Taxi1).add_taxi(Taxi2).add_taxi(Taxi3)
 
     #สร้าง account admin และเพิ่ม account admin เข้า list main
-    control.add_account( Admin('admin', 'admin'))
+    control.add_account( Admin('admin', 'admin', 'booking@gmail.com'))
 
 #ฟังก์ชั่นสร้างแอคเค้า
-def creat_account (name, password):
+def creat_account (name, password, mail):
     #สร้าง account จาก parameter name password และเพิ่ม account เข้า list main
-    control.add_account(User(name, password))
+    control.add_account(User(name, password, mail))
 
 
 
