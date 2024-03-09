@@ -125,6 +125,14 @@ def Reportpage():
 def Aboutpage():
     return render_template('about.html')
 
+@app.route('/contract')
+def Contract():
+    return render_template('contract.html')
+
+@app.route('/feedback')
+def Feedback():
+    return render_template('feedback.html')
+
 #--------------------Login-----Logout-----Register------------------------------------------------------------
 
 @app.route('/login', methods=['GET', 'POST'])

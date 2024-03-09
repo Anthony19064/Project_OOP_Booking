@@ -36,12 +36,31 @@
     font-family: sans;
     border-radius: 25px;
   }
+  .h3 {
+  font-size: 72px;
+  font-weight: bold;
+  background: linear-gradient( 55deg, #ff573a, white);
+  background-size: 40%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  animation: gradient 5s infinite;
+
+  }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
 </style>
 {% endblock %} {% block content %}
 <div class="jumbotron">
   <!-- <a href="/about" class="btn btn-primary btn-lg jus">About</a> -->
-  <h1 class="display-3 indent1">Welcome to Our Booking</h1>
-  <p class="lead indent1">Discover amazing experiences</p>
+  <h3 class="display-3 indent1 h3">Welcome to Our Booking</h1>
+  <p class="lead indent1 h3">Discover amazing experiences</p>
 </div>
 
 <div class="container py-4">
