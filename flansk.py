@@ -75,39 +75,41 @@ def get_image(folder, image_name):
 def index():
     return render_template('index.html')
 
-@app.route('/hotel')
+@app.route('/hotel', methods=['GET', 'POST'])
 def Hotelpage():
-    images = os.listdir(IMAGE_FOLDER_HOTEL)
-    return render_template('hotel.html',hotels=hotel_list, images=images, location="in Thailand")
+    if request.method == 'POST':
+        location_list_thai = ['กรุงเทพ', 'เชียงใหม่', 'ชลบุรี', 'ภูเก็ต', 'ขอนแก่น', 'ระยอง']
+        location_list_eng = ['Bangkok', 'Chiang mai', 'Chonburi', 'Phuket', 'Khon kaen', 'Rayong']
+        all_loca_list = [location_list_thai, location_list_eng]
+        folder_list = [IMAGE_FOLDER_HOTEL_BANGKOK, IMAGE_FOLDER_HOTEL_CHIANG_MAI, IMAGE_FOLDER_HOTEL_CHONBURI,
+                       IMAGE_FOLDER_HOTEL_PHUKET,  IMAGE_FOLDER_HOTEL_KHON_KAEN, IMAGE_FOLDER_HOTEL_RAYONG]
 
-@app.route('/process_form_data', methods=['POST'])
-def process_form_data():
-    location_list_thai = ['กรุงเทพ', 'เชียงใหม่', 'ชลบุรี', 'ภูเก็ต', 'ขอนแก่น', 'ระยอง']
-    location_list_eng = ['Bangkok', 'Chiang mai', 'Chonburi', 'Khon kaen', 'Phuket', 'Rayong']
-    all_loca_list = [location_list_thai, location_list_eng]
-    folder_list = [IMAGE_FOLDER_HOTEL_BANGKOK, IMAGE_FOLDER_HOTEL_CHIANG_MAI, IMAGE_FOLDER_HOTEL_CHONBURI,
-                   IMAGE_FOLDER_HOTEL_PHUKET,  IMAGE_FOLDER_HOTEL_KHON_KAEN, IMAGE_FOLDER_HOTEL_RAYONG]
-    
-    location = request.form['Location']
-    location.lower()
-    adult = request.form['Adult']
-    date = request.form['date']
-    
-    if location == '':
+        location = request.form['Location']
+        location = location.lower()
+        adult = request.form['Adult']
+        date = request.form['date']
+
+        if location == '':
+            hotel_list = control.get_hotel_list
+            hotel_list.sort(key=lambda x: x._Hotel__name)
+            images = os.listdir(IMAGE_FOLDER_HOTEL)
+            return render_template('hotel.html', hotels=hotel_list, images=images, location="in Thailand")
+        elif location != '':
+            for location_list in all_loca_list:
+                for i in range(len(location_list)):
+                    if location.lower() == location_list[i].lower():
+                        hotel_list = control.seach_hotel_from_location(location_list_thai[i])
+                        hotel_list.sort(key=lambda x: x._Hotel__name)
+                        images = os.listdir(folder_list[i])
+                        locate = location_list_eng[i]
+                        return render_template('hotel.html', hotels=hotel_list, images=images, location=f'in {locate}')
+            return render_template('hotel.html', hotels=[], images=[], location="Not Found")
+
+    else:  
         hotel_list = control.get_hotel_list
         hotel_list.sort(key=lambda x: x._Hotel__name)
         images = os.listdir(IMAGE_FOLDER_HOTEL)
-        return render_template('hotel.html',hotels=hotel_list, images=images, location="in Thailand")
-    elif location != '':
-        for location_list in all_loca_list:
-            for i in range(len(location_list)):
-                if location.lower() == location_list[i].lower():
-                    hotel_list = control.seach_hotel_from_location(location_list_thai[i])
-                    hotel_list.sort(key=lambda x: x._Hotel__name)
-                    images = os.listdir(folder_list[i])
-                    locate = location_list_eng[i]
-                    return render_template('hotel.html',hotels=hotel_list, images=images , location=f'in {locate}')
-        return render_template('hotel.html',hotels=[], images=[], location="Not Foud")
+        return render_template('hotel.html', hotels=hotel_list, images=images, location="in Thailand")
             
 @app.route('/taxi')
 def Taxipage():
