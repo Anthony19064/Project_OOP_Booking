@@ -195,9 +195,6 @@ def register():
                 return render_template('register.html', popup=True, warning="Your Username too short.")
             elif len(password) < 4:
                 return render_template('register.html', popup=True, warning="Your Password too short.")
-            
-            
-
             else:
                 creat_account(username, password, mail) 
                 return redirect(url_for('login'))  
