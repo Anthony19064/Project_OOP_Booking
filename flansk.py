@@ -148,7 +148,7 @@ def login():
                 return render_template('login.html', popup=True , warning="Please enter your Username and Password.")
             elif username == '':
                 return render_template('login.html', popup=True , warning="Please enter your Username.")
-            elif username == '':
+            elif password == '':
                 return render_template('login.html', popup=True , warning="Please enter your Password.")
             elif username == account.get_name and password != account.get_password:
                 return render_template('login.html', popup=True , warning="Password wrong  Pleas try agin.")
