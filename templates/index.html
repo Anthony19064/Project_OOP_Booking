@@ -41,20 +41,20 @@
   font-weight: bold;
   background: linear-gradient( 55deg, #ff573a, white);
   background-size: 40%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  animation: gradient 5s infinite;
-
-  }
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 5s infinite ease-in-out;
 }
+
+  @keyframes gradient {
+    0%, 100% { /* เริ่มและสิ้นสุดที่จุดเดิม */
+      background-position: 0% 50%;
+    }
+    50% { /* สามารถกำหนดการเคลื่อนไหวตรงกลางโดยใช้ 50% */
+      background-position: 100% 50%;
+    }
+  }
+
 </style>
 {% endblock %} {% block content %}
 <div class="jumbotron">
