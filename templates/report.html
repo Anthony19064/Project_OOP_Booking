@@ -3,6 +3,16 @@
 {% block style %}
 <style>
     /* เพิ่มสไตล์ตามที่ต้องการ */
+    .jumbotron {
+    background-size:cover;
+    background-position: center;
+    color: white;
+    text-align: left;
+    padding: 200px 0;
+    background-image: url(	https://www.pixelstalk.net/wp-content/uploads/images6/Mountain-4K-Wallpaper-HD.jpg);
+    opacity: 1;
+
+  }
     .feature-icon {
         width: 100px;
         height: 100px;
@@ -37,21 +47,45 @@
         flex-grow: 1;
     }
     .pading1{
-        padding: 1cm 2cm;
+        padding: 2.5cm 2cm;
 
     }
     .pading2{
         padding: 4cm 3cm;
     }
+    .h3 {
+        font-size: 72px;
+        font-weight: bold;
+        background: linear-gradient( 55deg, #bbffb4, rgb(58, 248, 0));
+        background-size: 40%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 5s infinite ease-in-out;
+
+  }
+
+  @keyframes gradient {
+    0%, 100% { /* เริ่มและสิ้นสุดที่จุดเดิม */
+      background-position: 0% 50%;
+    }
+    50% { /* สามารถกำหนดการเคลื่อนไหวตรงกลางโดยใช้ 50% */
+      background-position: 100% 50%;
+    }
+  }
+  .indent1 {
+    text-indent: 50px;
+  }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="cpntainer pading1 ">
-    <a href="{{ url_for('Contract') }}"class="btn btn-dark text2">Contract Admin</a>
-    <a href="{{ url_for('Feedback') }}"class="btn btn-dark text2">Feedback</a>
-    <a href="{{ url_for('Aboutpage') }}"class="btn btn-dark text2"> Edit Profile</a>
-</div>
+<div class="jumbotron">
+    <!-- <a href="/about" class="btn btn-primary btn-lg jus">About</a> -->
+    <h3 class="display-3 indent1 h3">Contact With Us</h1>
+  </div>
+<!-- <div class="cpntainer pading1 ">
+    <a href="{{ url_for('Feedback') }}"class="btn btn-dark ">Feedback</a>
+</div> -->
 <div class="container">
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         <div class="feature col">
