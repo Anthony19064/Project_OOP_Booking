@@ -158,7 +158,7 @@ def login():
                 return render_template('login.html', popup=True , warning="Please enter your Username.")
             elif password == '':
                 return render_template('login.html', popup=True , warning="Please enter your Password.")
-
+            
     session['next'] = request.referrer
     return render_template('login.html')
 
@@ -225,7 +225,7 @@ def taxi_page(taxi_name):
 
 #--------------------------Test-----------------------------------------------------------
 
-@app.route('/testdata')
+@app.route('/pay')
 def test_get_data():
     hotel = request.args.get('hotel')
     room = request.args.get('room')
@@ -234,7 +234,7 @@ def test_get_data():
     if session.get('username') is None:
         return redirect(url_for('login'))
     else:
-        return render_template('testdata.html', hotel=hotels, room=rooms)
+        return render_template('pay.html', hotel=hotels, room=rooms)
     
 
 #----------------------------------------------------------------------------------------------
