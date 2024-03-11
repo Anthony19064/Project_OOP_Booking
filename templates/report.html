@@ -63,9 +63,18 @@
         background-size: 40%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradient 5s infinite ease-in-out;
-
+            animation: gradient 5s infinite ease-in-out;     
   }
+    .content {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+        color: #000000
+    }
+    form {
+  max-width: 400px;
+  margin: 0 auto;
+}
 
   @keyframes gradient {
     0%, 100% { /* เริ่มและสิ้นสุดที่จุดเดิม */
@@ -78,12 +87,117 @@
   .indent1 {
     text-indent: 50px;
   }
+  /* .vh-100 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 200;
+  overflow: auto;
+  font-family: 'Poppins', sans-serif;
+} */
+
+.textup {
+  text-align: center;
+  font-weight: 700;
+}
+
+i {
+  margin-right: 3px;
+}
+
+.form-box {
+    background-color: transparent; 
+    box-shadow: 0 0 20px rgba(7, 7, 7, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    width: 500px;
+    transform: translate(270px,10px); /* ขยับกรอบไปทางขวา 50px และลงไปทางล่าง 50px */
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.radio-group {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+button {
+  background-color: grey;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 15px;
+  transition: .2s linear;
+}
+
+button:hover {
+  background-color: green;
+  border: none;
+  transform: translateY(-10px);
+}
+
+h1 {
+  font-size: 72px;
+  font-weight: bold;
+  background: linear-gradient( 45deg, #fa5a4b, #ffe695, #8dfce6, #99f0fd, #444c5f);
+  background-size: 40%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  animation: gradient 5s infinite;
+}
+
+h3 {
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient( 55deg, #000000, rgb(108, 106, 106));
+    background-size: 40%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    animation: gradient 5s infinite ease-in-out;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient( 55deg, #000000, rgb(108, 106, 106));
+    background-size: 40%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    animation: gradient 5s infinite ease-in-out;
+}
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="jumbotron">
-    <!-- <a href="/about" class="btn btn-primary btn-lg jus">About</a> -->
     <h3 class="display-3 indent1 h3">Contact With Us</h1>
   </div>
 <!-- <div class="cpntainer pading1 ">
@@ -92,45 +206,44 @@
 <div class="container">
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         <div class="feature col">
-            <h3 class="fs-3text-body-emphasis">Contact With Us</h3>
+            <h2 class="fs-3text-body-emphasis">Contact With Us</h2>
             <p>Our website's help center is happy to serve everyone who comes to use our services and improve and improve them. If you have any knowledge, please let us know. We will fix the problem as quickly as possible.</p>
-            <!-- <form action="/submit_report" method="post">
-                <div class="mb-3">
-                    <label for="problem-description" class="form-label">Problem Description</label>
-                    <textarea class="form-control" id="problem-description" rows="4" name="problem-description" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form> -->
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <p class="text-center pading2">Thank you for using our website</p>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid py-3 pading1" style="background-color: #525252ea;">
-  <div class="container ">
-      <ul class="nav justify-content-center navbar-dark">
-          <li class="nav-item">
-              <a class="nav-link active" aria-current="page"  href="#" style="color: rgb(255, 255, 255);">Contact</a>
-          </li>
-          <li class="nav-item">
-              <!-- <a class="nav-link" href="#">Contact</a> -->
-          </li>
-      </ul>
-      <div class="row">
-          <div class="col-md-12">
-              <p class="text-center text-white">Phone: 080-123-4567</p>
-              <p class="text-center text-white">Email: example@example.com</p>
-          </div>
-      </div>
-  </div>
-</div>
+    <div class="content" style="text-align: center;">
+        <h3>Feedback</h3> 
+        <div class="form-box"> 
+          <div class="textup"> 
+            <i class="bi bi-clock"></i> 
+            It only takes two minutes!! 
+          </div> 
+          <form> 
+            <label for="uname"> 
+              <i class="bi bi-person"></i> 
+              Name 
+            </label> 
+            <input type="text" id="uname" name="uname" required> 
+        
+            <label for="email"> 
+              <i class="bi bi-envelope"></i> 
+              Email Address 
+            </label> 
+            <input type="email" id="email" name="email" required> 
+        
+            <label for="phone"> 
+              <i class="bi bi-phone"></i> 
+              Phone No 
+            </label> 
+            <input type="tel" id="phone" name="phone" required> 
+            
+            <label for="msg"> 
+              <i class="bi bi-chat-left"></i> 
+              Write your Feedback: 
+            </label> 
+            <textarea id="msg" name="msg" rows="4" cols="10" required></textarea> 
+            
+            <button type="submit" href="{{ url_for('register') }}">Submit</button> 
+          </form> 
+        </div> 
 
 {% endblock %}

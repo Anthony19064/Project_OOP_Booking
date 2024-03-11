@@ -133,6 +133,10 @@ def Contract():
 def Feedback():
     return render_template('feedback.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 #--------------------Login-----Logout-----Register------------------------------------------------------------
 
 @app.route('/login', methods=['GET', 'POST'])
