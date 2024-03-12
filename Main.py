@@ -110,6 +110,7 @@ class Transection:
     id = 0
     def __init__(self, type):
         self.__id = Transection.id
+        Transection.id += 1
     
     @property
     def get_id (self):

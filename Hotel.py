@@ -57,9 +57,11 @@ class Room:
     def set_date_in (self, date_in):
         self.__date_in = date_in
 
+
     #เพิ่มวันที่ออกโรงแรม
     def set_date_out (self, date_out):
         self.__date_out = date_out
+
     
 
 

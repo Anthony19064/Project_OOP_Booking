@@ -53,9 +53,15 @@
 <div class="test">
     <div class="section">
         <h2>รายละเอียดการจองโรงแรม</h2>
-        <form action="">
+        <form action="/confirm" method="post"   >
             <input type="hidden" id="hotel_name" name="hotel_name" value="{{ hotel.get_name }}">
-            <input type="hidden" id="room_type" name="room_number" value="{{ room.get_room_number}}">
+            <input type="hidden" id="room_type" name="room_type" value="{{ room.get_type_room }}">
+            <input type="hidden" id="room_number" name="room_number" value="{{ room.get_room_number }}">
+            <input type="hidden" id="head_count" name="head_count" value="{{ head_count}}">
+            <input type="hidden" id="date_in" name="date_in" value="{{ date_in}}">
+            <input type="hidden" id="date_out" name="date_out" value="{{ date_out}}">
+            <input type="hidden" id="price" name="price" value="{{ price }}">
+
 
             <p>ชื่อโรงแรม: <b>{{ hotel.get_name }} Hotel</b></p>
             <p>ประเภทห้อง: <b>{{ room.get_type_room }}</b></p>
@@ -64,6 +70,7 @@
             <p>วันเช็คเอ้าท์ <b>{{ date_out }}</b></p>
             <p>จำนวนวันที่พัก <b>{{ day }} วัน</b></p>
             <p>ราคาทั้งหมด: <b>{{ price }}</b> บาท</p>
+            <center><button type="submit" class="btn btn-success">ยืนยันการจอง</button></center>
         
 
         </form>

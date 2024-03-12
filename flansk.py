@@ -129,7 +129,15 @@ def Feedback():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    account = control.seach_account(session['username'])
+    transection = account.get_transaction
+    return render_template('profile.html', transection=transection)
+
+@app.route('/test')
+def test():
+    account = control.seach_account(session['username'])
+    transection = account.get_transaction
+    return render_template('test.html', transection=transection)
 
 #--------------------Login-----Logout-----Register------------------------------------------------------------
 
@@ -233,8 +241,8 @@ def pay():
     else:
         return render_template('pay.html', hotel=hotels, room=rooms)
 
-@app.route('/confirm', methods=['GET', 'POST'])
-def confirm():
+@app.route('/confirm_page', methods=['GET', 'POST'])
+def confirm_page():
     if session.get('username') is None:
         return redirect(url_for('login'))
     else:
@@ -279,10 +287,27 @@ def confirm():
     return redirect(url_for('index'))
         
 
+@app.route('/confirm', methods=['GET', 'POST'])
+def confirm():
+    hotel_name = request.form.get('hotel_name')
+    room_type = request.form.get('room_type')
+    room_number = request.form.get('room_number')
+    head_count = request.form.get('head_count')
+    date_in = request.form.get('date_in')
+    date_out = request.form.get('date_out')
+    price = request.form.get('price')
+
+    hotel = control.seach_hotel_from_name(hotel_name)
+    room = hotel.search_room(int(room_number))
+    room.set_date_in(date_in)
+    room.set_date_out(date_out)
+    # room.set_date_in(date_in)
+    # room.set__date_out(date_out)
 
 
-
-
+    account = control.seach_account(session['username'])
+    account.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
+    return render_template('index.html')
     
 #----------------------------------------------------------------------------------------------
 

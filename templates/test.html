@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+    .table td,
+    .table th {
+        white-space: nowrap; /* ป้องกันข้อความซ้อนทับกัน */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>เลขรายการ</th>
+                <th>ประเภท</th>
+                <th>ชื่อโรงแรม</th>
+                <th>ประเภทห้อง</th>
+                <th>วันเช็คอิน</th>
+                <th>วันเช็คเอ้าท์</th>
+                <th>ราคา</th>
+                <th>จำนวนคน</th>
+                <th>ชื่อ</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tran in transection %}
+            <tr>
+                <td>{{ tran.get_id }}</td>
+                <td>{{ tran.get_type }}</td>
+                <td>{{ tran.get_hotel_name }}</td>
+                <td>{{ tran.get_room }}</td>
+                <td>{{ tran.get_date_in }}</td>
+                <td>{{ tran.get_date_out }}</td>
+                <td>{{ tran.get_price }}</td>
+                <td>{{ tran.get_headcount }}</td>
+                <td>{{ tran.get_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
