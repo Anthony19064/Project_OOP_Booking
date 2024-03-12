@@ -220,7 +220,7 @@ def taxi_page(taxi_name):
 
 #--------------------------Test-----------------------------------------------------------
 
-@app.route('/pay', methods=['GET', 'POST'])
+@app.route('/pay')
 def pay():
     hotel = request.args.get('hotel')
     room = request.args.get('room')
@@ -232,6 +232,24 @@ def pay():
         return redirect(url_for('login'))
     else:
         return render_template('pay.html', hotel=hotels, room=rooms)
+
+@app.route('/confirm', methods=['GET', 'POST'])
+def confirm():
+    if request.method == 'POST':
+        hotel_name = request.form.get('hotel_name')
+        room_number = request.form.get('room_number')
+        date_in = request.form.get('date_in')
+        date_out = request.form.get('date_out')
+        head_count = request.form.get('head_count')
+        hotel = control.seach_hotel_from_name(hotel_name)
+        room = hotel.search_room(int(room_number))
+        return render_template('confirm.html', hotel=hotel, room=room, date_in=date_in, date_out=date_out, head_count=head_count)
+        
+
+
+
+
+
     
 #----------------------------------------------------------------------------------------------
 

@@ -23,12 +23,11 @@
         height: 100%;
     }
 
-
-
     .date,
     form {
         display: inline;
     }
+
     .booking-details {
         margin: auto;
         display: flex;
@@ -42,7 +41,6 @@
     }
 </style>
 
-
 {% endblock %}
 
 {% block content %}
@@ -52,34 +50,33 @@
 <div class="test">
     <div class="section">
         <h2>รายละเอียดโรงแรม</h2>
-        <p> ชื่อโรงแรม : <b>{{ hotel.get_name }} Hotel</b></p>
-        <p> ประเภทห้อง : <b>{{ room.get_type_room }}</b> </p>
-        <p> จำนวนคนที่พักได้ : <b>{{ room.get_head_count }}</b> คน </p>
-        <p> ราคาต่อคืน : <b>{{ room.get_price }}</b> บาท</p>
-            <form action="" method="post">
-            <p class="date">วันเช็คอิน :
-                <div class="btn-group">
-                    <input type="date" id="date_in" name="date_in"  min="date" max="2030-12-31" />
-                </div>
-            </p>
-            <p class="date">วันเช็คเอ้าท์ :
-                <div class="btn-group">
-                    <input type="date" id="date_out" name="date_out"  min="date" max="2030-12-31" />
-                </div>
-            </p>
-            <button
-        type="submit"
-        class="btn btn-dark btn-md "
-      >
-        Search
-      </button>
-            </form>
+        <form action="/confirm" method="post">
+            <input type="hidden" id="hotel_name" name="hotel_name" value="{{ hotel.get_name }}">
+            <input type="hidden" id="room_type" name="room_number" value="{{ room.get_room_number}}">
 
+            <p>ชื่อโรงแรม: <b>{{ hotel.get_name }} Hotel</b></p>
+            <p>ประเภทห้อง: <b>{{ room.get_type_room }}</b></p>
+            <p>จำนวนคนที่พักได้: <b>{{ room.get_head_count }}</b> คน</p>
+            <p>ราคาต่อคืน: <b>{{ room.get_price }}</b> บาท</p>
         
-
+            <p class="date">วันเช็คอิน:
+                <div class="btn-group">
+                    <input type="date" id="date_in" name="date_in" min="date" max="2030-12-31" />
+                </div>
+            </p>
+            <p class="date">วันเช็คเอ้าท์:
+                <div class="btn-group">
+                    <input type="date" id="date_out" name="date_out" min="date" max="2030-12-31" />
+                </div>
+            </p>
+        
+            <label class="form-label" for="head_count">จำนวนคนเข้าพัก</label>
+            <input type="text" id="head_count" name="head_count" />
+        
+            <button type="submit" class="btn btn-success">ยืนยัน</button>
+        </form>
+        
     </div>
-    
-
 </div>
 
 {% endblock %}
