@@ -57,6 +57,7 @@ def get_image(folder, image_name):
                   'Glory Boutique', 'Hotel Fuse Rayong', 'Karin', 'Le cassia', 'Lit Bangkok', 'Madera Residence', 'Nadee 10', 'Novotel Rayong Star Centre', 
                   'Oakwood', 'Phavina Hotel Rayong', 'Romantic', 'Seabed Grand', 'Sirin', 'Star Convention', 'The Blanket', 'The Opium',
                   'The Quartier', 'Taxi Company', 'Taxi Siam inter Company', 'Taxi bangkok', 'กรุงเทพ']
+    
     list_folder = [IMAGE_FOLDER_HOTEL, IMAGE_FOLDER_TAXI, AMORA_THAPAE, BAIYOKE_SKY, BANGSEAN, BLU_MONKEY, BLUE_CARINA, CENTARA_CHIANG_MAI, CITADINES_GRAND_CENTRAL, 
                    GLORY_BOUTIQUE, HOTEL_FUSE_RAYONG, KARIN, LE_CASSIA, LIT_BANGKOK, MADERA_RESIDENCE, NADEE_10, NOVOTEL_RAYONG_STAR_CENTRE, OAKWOOD,
                    PHAVINA_HOTEL_RAYONG, ROMANTIC, SEABED_GRAND, SIRIN, STAR_CONVENTION, THE_BLANKET, THE_OPIUM, THE_QUARTIER, TAXI_COMPANY, TAXI_SIAM_INTER_COMPANY,
@@ -105,7 +106,6 @@ def Hotelpage():
                         locate = location_list_eng[i]
                         return render_template('hotel.html', hotels=hotel_list, images=images, location=f'in {locate}')
             return render_template('hotel.html', hotels=[], images=[], location="Not Found")
-
     else:  
         hotel_list = control.get_hotel_list
         hotel_list.sort(key=lambda x: x._Hotel__name)
@@ -167,7 +167,6 @@ def login():
     return render_template('login.html')
 
 
-
 @app.route('/logout')
 def logout():
     session['next'] = request.referrer
@@ -205,8 +204,6 @@ def register():
                 return redirect(url_for('login'))  
     return render_template('register.html')
 
-
-
 #--------------------------Hotel-----------------------------------------------------------
 
 @app.route('/hotel/<hotel_name>')
@@ -240,7 +237,6 @@ def test_get_data():
     else:
         return render_template('pay.html', hotel=hotels, room=rooms)
     
-
 #----------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
