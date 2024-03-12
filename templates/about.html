@@ -2,6 +2,7 @@
 <style>
   body {
     background-color: hsl(0, 0%, 87%);
+    background-attachment: fixed;
   }
 
   .jumbotron {
@@ -9,7 +10,7 @@
     background-position: left;
     color: white;
     text-align: left;
-    padding: 200px 0;
+    padding: 200px;
     background-image: url(https://images.unsplash.com/photo-1642037802844-c11342a56200?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
     opacity: 1;
   }
@@ -45,7 +46,7 @@
   .h3 {
     font-size: 72px;
     font-weight: bold;
-    background: linear-gradient(55deg, #ffffff, rgb(117, 241, 85));
+    background: linear-gradient(55deg, #f28303, rgb(252, 0, 0));
     background-size: 40%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -79,12 +80,6 @@
     font-size: 18px;
   }
 
-  a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-  }
-
   button:hover,
   a:hover {
     opacity: 0.7;
@@ -108,9 +103,7 @@
 {% endblock %} {% block content %}
 
 <div class="jumbotron">
-  <!-- <a href="/about" class="btn btn-primary btn-lg jus">About</a> -->
-  <h3 class="display-3 indent1 h3">About of us</h1>
-    <p class="lead indent1 h3">Information about the website</p>
+  <h3 class="display-3 indent1 h3">About of us</h3>
 </div>
 <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
   <div class="feature col">
