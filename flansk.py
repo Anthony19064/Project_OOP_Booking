@@ -235,15 +235,48 @@ def pay():
 
 @app.route('/confirm', methods=['GET', 'POST'])
 def confirm():
-    if request.method == 'POST':
-        hotel_name = request.form.get('hotel_name')
-        room_number = request.form.get('room_number')
-        date_in = request.form.get('date_in')
-        date_out = request.form.get('date_out')
-        head_count = request.form.get('head_count')
-        hotel = control.seach_hotel_from_name(hotel_name)
-        room = hotel.search_room(int(room_number))
-        return render_template('confirm.html', hotel=hotel, room=room, date_in=date_in, date_out=date_out, head_count=head_count)
+    if session.get('username') is None:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST':
+            hotel_name = request.form.get('hotel_name')
+            room_number = request.form.get('room_number')
+            date_in = request.form.get('date_in')
+            date_out = request.form.get('date_out')
+            head_count = request.form.get('head_count')
+            hotel = control.seach_hotel_from_name(hotel_name)
+            room = hotel.search_room(int(room_number))
+
+            date1 = int(date_in[8:])
+            date2 = int(date_out[8:])
+            month1 = int(date_in[5:7])
+            month2 = int(date_out[5:7])
+            year1 = int(date_in[0:4])
+            year2 = int(date_out[0:4])
+
+            day = date2 - date1
+            month = month2 - month1
+            year = year2 - year1
+            price_room = room.get_price
+            day_count = 0
+            if year > 0:
+                if month > 0:
+                    price = (day + (month *30) + (year *365)) * price_room
+                    day_count += (day + (month *30) + (year *365))
+                else:
+                    price = (day + (year *365)) * price_room
+                    day_count += (day + (year *365))
+            else:
+                if month > 0:
+                    price = (day + (month *30)) * price_room
+                    day_count += (day + (month *30))
+                else:
+                    price = day * price_room
+                    day_count += day
+            
+
+            return render_template('confirm.html', hotel=hotel, room=room, date_in=date_in, date_out=date_out, head_count=head_count, day=day_count , price=price)
+    return redirect(url_for('index'))
         
 
 

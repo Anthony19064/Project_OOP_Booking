@@ -83,6 +83,10 @@ class Account:
         self.__transaction.append(transaction)
         return self
     
+    @property
+    def get_transaction (self):
+        return self.__transaction
+    
 class Admin(Account):
     def __init__(self, name, password, mail):
         Account.__init__(self, name, password, mail)
