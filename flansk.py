@@ -7,9 +7,7 @@ creat_instance()
 app = Flask(__name__)
 app.secret_key = 'booking'
 hotel_list = control.get_hotel_list
-hotel_list.sort(key=lambda x: x._Hotel__name)
 taxi_list = control.get_taxi_list
-taxi_list.sort(key=lambda x: x._Taxi__name)
 account_list = control.get_account_list
 
 
@@ -88,12 +86,10 @@ def Hotelpage():
 
         location = request.form['Location']
         location = location.lower()
-        adult = request.form['Adult']
-        date = request.form['date']
+
 
         if location == '':
             hotel_list = control.get_hotel_list
-            hotel_list.sort(key=lambda x: x._Hotel__name)
             images = os.listdir(IMAGE_FOLDER_HOTEL)
             return render_template('hotel.html', hotels=hotel_list, images=images, location="in Thailand")
         elif location != '':
@@ -101,14 +97,12 @@ def Hotelpage():
                 for i in range(len(location_list)):
                     if location.lower() == location_list[i].lower():
                         hotel_list = control.seach_hotel_from_location(location_list_thai[i])
-                        hotel_list.sort(key=lambda x: x._Hotel__name)
                         images = os.listdir(folder_list[i])
                         locate = location_list_eng[i]
                         return render_template('hotel.html', hotels=hotel_list, images=images, location=f'in {locate}')
             return render_template('hotel.html', hotels=[], images=[], location="Not Found")
     else:  
         hotel_list = control.get_hotel_list
-        hotel_list.sort(key=lambda x: x._Hotel__name)
         images = os.listdir(IMAGE_FOLDER_HOTEL)
         return render_template('hotel.html', hotels=hotel_list, images=images, location="in Thailand")
             
@@ -226,12 +220,14 @@ def taxi_page(taxi_name):
 
 #--------------------------Test-----------------------------------------------------------
 
-@app.route('/pay')
-def test_get_data():
+@app.route('/pay', methods=['GET', 'POST'])
+def pay():
     hotel = request.args.get('hotel')
     room = request.args.get('room')
+    date_in = request.args.get('date_in')
     hotels = control.seach_hotel_from_name(hotel)
     rooms = hotels.search_room(int(room))
+
     if session.get('username') is None:
         return redirect(url_for('login'))
     else:

@@ -207,7 +207,7 @@
                         โดยราคาต่อคืนจะอยู่ที่ <b>{{ rooms[i].get_price }}</b> บาท</p>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ url_for('test_get_data', hotel=hotels.get_name, room=rooms[i].get_room_number) }}" class="btn btn-dark" >จองห้องพัก</a>
+                    <a href="{{ url_for('pay', hotel=hotels.get_name, room=rooms[i].get_room_number) }}" class="btn btn-dark" >จองห้องพัก</a>
 
                 </div>                
             </div>

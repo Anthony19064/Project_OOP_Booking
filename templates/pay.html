@@ -2,51 +2,84 @@
 
 {% block style %}
 <style>
-        .test {
-            margin: 0; /* ลบ margin ทั้งหมด */
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
+    .test {
+        margin: 0;
+        /* ลบ margin ทั้งหมด */
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
 
-        /* กำหนดสไตล์สำหรับส่วนที่หนึ่ง */
-        .left-section {
-            width: 69%; /* ให้มีขนาดเล็กน้อยเพื่อให้มีระยะห่าง */
-            border: 1px solid #000; /* เพิ่มขอบแสดงผล 1px สีดำ */
-            padding: 10px; /* เพิ่ม padding 10px */
-            height: 100%;
-        }
+    /* กำหนดสไตล์สำหรับส่วนที่หนึ่ง */
+    .section {
+        margin: auto;
+        display: flex;
+        flex-direction: column; /* หรือ row ตามที่คุณต้องการ */
+        align-items: center;
+        justify-content: center;
+        width: 30%;
+        border: 1px solid #000;
+        padding: 10px;
+        height: 100%;
+    }
 
-        /* กำหนดสไตล์สำหรับส่วนที่สอง */
-        .right-section {
-            width: 30%; /* ให้มีขนาดเล็กน้อยเพื่อให้มีระยะห่าง */
-            border: 1px solid #000; /* เพิ่มขอบแสดงผล 1px สีดำ */
-            padding: 10px; /* เพิ่ม padding 10px */
-            height: 100%;
-        }
 
+
+    .date,
+    form {
+        display: inline;
+    }
+    .booking-details {
+        margin: auto;
+        display: flex;
+        flex-direction: column; /* หรือ row ตามที่คุณต้องการ */
+        align-items: center;
+        justify-content: center;
+        width: 30%;
+        border: 1px solid #000;
+        padding: 10px;
+        height: 100%;
+    }
 </style>
 
 
 {% endblock %}
 
-{% block content %} 
+{% block content %}
 
 <!-- <center><h1>โรงแรมที่คุณเลือก {{hotel.get_name}} Hotel</h1></center>
 <center><p style="font-size: 30px; ">ห้องประเภท {{ room.get_type_room }}</p></center> -->
 <div class="test">
-<div class="left-section">
- <p> Hotel name : <b>{{ hotel.get_name}}</b> Hotel</p>
- <p> Type room  : <b>{{ room.get_type_room }}</b> Room</p>
- <p> Head count :  <b> {{ room.get_head_count }} </b>People </p>
- <p> Price      : <b>{{ room.get_price }}</b> Baht</p>
+    <div class="section">
+        <h2>รายละเอียดโรงแรม</h2>
+        <p> ชื่อโรงแรม : <b>{{ hotel.get_name }} Hotel</b></p>
+        <p> ประเภทห้อง : <b>{{ room.get_type_room }}</b> </p>
+        <p> จำนวนคนที่พักได้ : <b>{{ room.get_head_count }}</b> คน </p>
+        <p> ราคาต่อคืน : <b>{{ room.get_price }}</b> บาท</p>
+            <form action="" method="post">
+            <p class="date">วันเช็คอิน :
+                <div class="btn-group">
+                    <input type="date" id="date_in" name="date_in"  min="date" max="2030-12-31" />
+                </div>
+            </p>
+            <p class="date">วันเช็คเอ้าท์ :
+                <div class="btn-group">
+                    <input type="date" id="date_out" name="date_out"  min="date" max="2030-12-31" />
+                </div>
+            </p>
+            <button
+        type="submit"
+        class="btn btn-dark btn-md "
+      >
+        Search
+      </button>
+            </form>
+
+        
+
+    </div>
+    
+
 </div>
 
-<!-- ส่วนที่สอง -->
-<div class="right-section">
-    <h2>Right Section</h2>
-    <p>This is the content of the right section.</p>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. .</p>
-</div>
-</div>
 {% endblock %}
