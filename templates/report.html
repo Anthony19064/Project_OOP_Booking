@@ -5,6 +5,7 @@
    
     body {
     background-color: hsl(0, 0%, 87%);
+    background-attachment: fixed;
   }
     .jumbotron {
     background-size:cover;
@@ -12,7 +13,7 @@
     color: white;
     text-align: left;
     padding: 200px 0;
-    background-image: url(	https://www.pixelstalk.net/wp-content/uploads/images6/Mountain-4K-Wallpaper-HD.jpg);
+    background-image: url(https://images.unsplash.com/photo-1638085460989-f9f26db33840?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
     opacity: 1;
 
   }
@@ -22,7 +23,6 @@
         border-radius: 50%;
         color: white;
         background-color: #0c0c0c;
-        display: flex;
         align-items: center;
         justify-content: center;
         font-size: 2rem;
@@ -46,6 +46,14 @@
     max-height: 200px;
     }
 
+    .container {
+    margin-left: 50px; /* ขยับกล่องข้อความไปทางซ้าย 50px */
+    }
+
+    .details {
+    text-align: center;
+    transform: translate(150px, 0px); /* ขยับตำแหน่งข้อความไปทางขวา 150px */
+    }
     .container-fluid .container {
         flex-grow: 1;
     }
@@ -59,18 +67,13 @@
     .h3 {
         font-size: 72px;
         font-weight: bold;
-        background: linear-gradient( 55deg, #fce877, rgb(255, 170, 44));
+        background: linear-gradient( 55deg, #ffffff, rgb(0, 0, 0));
         background-size: 40%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradient 5s infinite ease-in-out;     
   }
-    .content {
-        position: relative;
-        z-index: 1;
-        padding: 20px;
-        color: #000000
-    }
+
     form {
   max-width: 400px;
   margin: 0 auto;
@@ -87,15 +90,6 @@
   .indent1 {
     text-indent: 50px;
   }
-  /* .vh-100 {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 200;
-  overflow: auto;
-  font-family: 'Poppins', sans-serif;
-} */
 
 .textup {
   text-align: center;
@@ -112,21 +106,9 @@ i {
     padding: 15px;
     border-radius: 8px;
     width: 500px;
-    transform: translate(270px,10px); /* ขยับกรอบไปทางขวา 50px และลงไปทางล่าง 50px */
-}
+    border: 1px solid #000000; /* เพิ่มเส้นขอบสีเทา */
 
-form {
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.radio-group {
-  display: flex;
-  margin-bottom: 16px;
-}
-
-input[type="radio"] {
-  margin-right: 8px;
+    
 }
 
 label {
@@ -173,15 +155,17 @@ h1 {
   animation: gradient 5s infinite;
 }
 
-h3 {
+h4 {
     font-size: 40px;
     font-weight: bold;
-    background: linear-gradient( 55deg, #000000, rgb(108, 106, 106));
+    background: linear-gradient(55deg, #000000, rgb(108, 106, 106));
     background-size: 40%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     animation: gradient 5s infinite ease-in-out;
+    /* transform: translate(150px, -10px); ขยับตำแหน่งข้อความไปทางขวา 10px และลงไปทางล่าง 20px */
 }
+
 
 h2 {
     font-size: 40px;
@@ -197,53 +181,55 @@ h2 {
 {% endblock %}
 
 {% block content %}
+<!-- Photo & Contact with us -->
 <div class="jumbotron">
     <h3 class="display-3 indent1 h3">Contact With Us</h1>
   </div>
-<!-- <div class="cpntainer pading1 ">
-    <a href="{{ url_for('Feedback') }}"class="btn btn-dark ">Feedback</a>
-</div> -->
+
+<!--Feedback -->
 <div class="container">
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="feature col">
-            <h2 class="fs-3text-body-emphasis">Contact With Us</h2>
-            <p>Our website's help center is happy to serve everyone who comes to use our services and improve and improve them. If you have any knowledge, please let us know. We will fix the problem as quickly as possible.</p>
-        </div>
+  <div class="content" style="display: flex; justify-content: space-between; align-items: right;">
+      <div>
+          <h4><center>Feedback</center></h4>
+          <div class="form-box">
+              <div class="textup">
+                  <i class="bi bi-clock"></i> It only takes two minutes!!
+              </div>
+              <form>
+                  <label for="uname">
+                      <i class="bi bi-person"></i> Name
+                  </label>
+                  <input type="text" id="uname" name="uname" required>
+
+                  <label for="email">
+                      <i class="bi bi-envelope"></i> Email Address
+                  </label>
+                  <input type="email" id="email" name="email" required>
+
+                  <label for="phone">
+                      <i class="bi bi-phone"></i> Phone Number
+                  </label>
+                  <input type="tel" id="phone" name="phone" required>
+
+                  <label for="msg">
+                      <i class="bi bi-chat-left"></i> Write your Feedback:
+                  </label>
+                  <textarea id="msg" name="msg" rows="4" cols="10" required></textarea>
+
+                  <button type="submit" href="{{ url_for('register') }}">Submit</button>
+              </form>
+          </div>
+      </div>
+      <!-- Contact With us -->
+      <div class="details" style="display: flex; justify-content: flex-end;">
+    <div class="detail">
+        <h2 class="fs-3 text-body-emphasis"><center>Contact With Us</center></h2>
+        <p>Our website's help center is happy to serve everyone who comes to use our services and improve and improve them. If you have any knowledge, please let us know. We will fix the problem as quickly as possible.</p>
+        <img src="https://images.unsplash.com/photo-1579578387690-8a374881bb58?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" width="1000" height="400">
     </div>
-    <div class="content" style="text-align: center;">
-        <h3>Feedback</h3> 
-        <div class="form-box"> 
-          <div class="textup"> 
-            <i class="bi bi-clock"></i> 
-            It only takes two minutes!! 
-          </div> 
-          <form> 
-            <label for="uname"> 
-              <i class="bi bi-person"></i> 
-              Name 
-            </label> 
-            <input type="text" id="uname" name="uname" required> 
-        
-            <label for="email"> 
-              <i class="bi bi-envelope"></i> 
-              Email Address 
-            </label> 
-            <input type="email" id="email" name="email" required> 
-        
-            <label for="phone"> 
-              <i class="bi bi-phone"></i> 
-              Phone No 
-            </label> 
-            <input type="tel" id="phone" name="phone" required> 
-            
-            <label for="msg"> 
-              <i class="bi bi-chat-left"></i> 
-              Write your Feedback: 
-            </label> 
-            <textarea id="msg" name="msg" rows="4" cols="10" required></textarea> 
-            
-            <button type="submit" href="{{ url_for('register') }}">Submit</button> 
-          </form> 
-        </div> 
+</div>
+
+  </div>
+</div>
 
 {% endblock %}
