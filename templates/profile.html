@@ -93,6 +93,26 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
+.txtt-1 {
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.txtt-2 {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
 h1 {
     margin-top: 10px;
     color: #007bff;
@@ -119,6 +139,46 @@ h9 {
     font-size: 40px;
     font-weight: bold;
     background: linear-gradient(55deg, #1100f8, rgb(255, 255, 255));
+    background-size: 40%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 5s infinite ease-in-out;
+}
+@keyframes gradient {
+    0%, 100% { /* เริ่มและสิ้นสุดที่จุดเดิม */
+      background-position: 0% 50%;
+    }
+    50% { /* สามารถกำหนดการเคลื่อนไหวตรงกลางโดยใช้ 50% */
+      background-position: 100% 50%;
+    }
+  }
+
+  h10 {
+    margin-top: 10px;
+    color: #007bff;
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(55deg, #f800ba, rgb(255, 255, 255));
+    background-size: 40%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 5s infinite ease-in-out;
+}
+@keyframes gradient {
+    0%, 100% { /* เริ่มและสิ้นสุดที่จุดเดิม */
+      background-position: 0% 50%;
+    }
+    50% { /* สามารถกำหนดการเคลื่อนไหวตรงกลางโดยใช้ 50% */
+      background-position: 100% 50%;
+    }
+  }
+  
+  h11 {
+    margin-top: 10px;
+    color: #007bff;
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(55deg, #000000, rgb(255, 255, 255));
     background-size: 40%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -381,8 +441,9 @@ h9 {
 </div>
 {% endif %}
 {% if session['username'] != 'admin' %}
-<div class="container">
-  <center><p><h1>ประวัติการทำรายการโรงแรม</h1></p></center> 
+<div class="txtt">
+  <div class="txtt-1">
+  <center><p><h11>ประวัติการทำรายการโรงแรม</h11></p></center> 
   <table class="table table-striped">
       <thead>
           <tr>
@@ -418,8 +479,9 @@ h9 {
       </tbody>
   </table>
 </div>
-<div class="container mt-5 mb-5">
-  <center><p><h1>ประวัติการทำรายการแท็กซี่</h1></p></center> 
+<div class="txtt mt-5 mb-5">
+  <div class="txtt-2">
+  <center><p><h10>ประวัติการทำรายการแท็กซี่</h10></p></center> 
   <table class="table table-striped">
       <thead>
           <tr>
