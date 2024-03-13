@@ -123,11 +123,12 @@ class Transection:
         return self.__type
 
 class Transection_hotel(Transection):
-    def __init__(self, hotel_name, room, date_in, date_out, price, head_count, name):
+    def __init__(self, hotel_name, room_type, room_number, date_in, date_out, price, head_count, name):
         Transection.__init__(self, type)
         self.__type = "Hotel"
         self.__hotel_name = hotel_name
-        self.__room = room
+        self.__room_type = room_type
+        self.__room_number = room_number
         self.__date_in = date_in
         self.__date_out = date_out
         self.__price = price
@@ -143,8 +144,12 @@ class Transection_hotel(Transection):
         return self.__hotel_name
     
     @property
-    def get_room(self):
-        return self.__room
+    def get_room_type(self):
+        return self.__room_type
+    
+    @property
+    def get_room_number(self):
+        return self.__room_number
     
     @property
     def get_date_in(self):
@@ -167,11 +172,12 @@ class Transection_hotel(Transection):
         return self.__name
 
 class Transection_taxi(Transection):
-    def __init__(self, taxi_name, taxi_type, date, travel_type, pickup_location, destination_location, price, head_count, name):
+    def __init__(self, taxi_name, taxi_type, taxi_number, date, travel_type, pickup_location, destination_location, price, head_count, name):
         Transection.__init__(self, type)
         self.__type = "Taxi"
         self.__taxi_name = taxi_name
         self.__taxi_type = taxi_type
+        self.__taxi_number = taxi_number
         self.__date = date
         self.__travel_type = travel_type
         self.__pickup_location = pickup_location
@@ -191,6 +197,10 @@ class Transection_taxi(Transection):
     @property
     def get_taxi_type(self):
         return self.__taxi_type
+    
+    @property
+    def get_taxi_number(self):
+        return self.__taxi_number
     
     @property
     def get_date(self):

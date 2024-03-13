@@ -241,6 +241,7 @@
               <th>ประเภทรายการ</th>
               <th>ชื่อโรงแรม</th>
               <th>ประเภทห้อง</th>
+              <th>หมายเลขห้อง</th>
               <th>วันเช็คอิน</th>
               <th>วันเช็คเอ้าท์</th>
               <th>ราคา</th>
@@ -256,13 +257,16 @@
               <td>{{ tran.get_id }}</td>
               <td>{{ tran.get_type }}</td>
               <td>{{ tran.get_hotel_name }}</td>
-              <td>{{ tran.get_room }}</td>
+              <td>{{ tran.get_room_type }}</td>
+              <td>{{ tran.get_room_number}}</td>
               <td>{{ tran.get_date_in }}</td>
               <td>{{ tran.get_date_out }}</td>
               <td>{{ tran.get_price }}</td>
               <td>{{ tran.get_headcount }}</td>
               <td>{{ tran.get_name }}</td>
-              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+              <td><!-- HTML code -->
+                <a class="btn btn-danger" href="{{ url_for('delete_transaction', tran_id=tran.get_id, name=tran.get_name ) }}" role="button"> ลบ </a>
+                </td> 
           </tr>
           {% endif %}
           {% endfor %}
@@ -278,6 +282,7 @@
               <th>ประเภทรายการ</th>
               <th>ชื่อบริษัท</th>
               <th>ประเภทรถ</th>
+              <th>เบอร์คนขับ</th>
               <th>วันใช้บริการ</th>
               <th>ประเภทการโดยสาร</th>
               <th>สถานที่ต้นทาง</th>
@@ -296,6 +301,7 @@
               <td>{{ tran.get_type }}</td>
               <td>{{ tran.get_taxi_name }}</td>
               <td>{{ tran.get_taxi_type }}</td>
+              <td>{{ tran.get_taxi_number}}</td>
               <td>{{ tran.get_date }}</td>
               <td>{{ tran.get_travel_type }}</td>
               <td>{{ tran.get_pickup_location }}</td>
@@ -303,7 +309,7 @@
               <td>{{ tran.get_price }}</td>
               <td>{{ tran.get_headcount }}</td>
               <td>{{ tran.get_name }}</td>
-              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+              <td><a class="btn btn-danger" href="{{ url_for('delete_transaction', tran_id=tran.get_id, name=tran.get_name ) }}" role="button"> ลบ </a></td> 
           </tr>
           {% endif %}
           {% endfor %}
@@ -321,28 +327,28 @@
               <th>ประเภทรายการ</th>
               <th>ชื่อโรงแรม</th>
               <th>ประเภทห้อง</th>
+              <th>หมายเลขห้อง</th>
               <th>วันเช็คอิน</th>
               <th>วันเช็คเอ้าท์</th>
               <th>ราคา</th>
               <th>จำนวนคน</th>
               <th>ชื่อ</th>
-              <th>ดำเนินการ</th> <!-- เพิ่มหัวข้อใหม่ -->
           </tr>
       </thead>
       <tbody>
           {% for tran in transection %}
           {% if tran.get_type == 'Hotel' %}
           <tr>
-              <td>{{ tran.get_id }}</td>
-              <td>{{ tran.get_type }}</td>
-              <td>{{ tran.get_hotel_name }}</td>
-              <td>{{ tran.get_room }}</td>
-              <td>{{ tran.get_date_in }}</td>
-              <td>{{ tran.get_date_out }}</td>
-              <td>{{ tran.get_price }}</td>
-              <td>{{ tran.get_headcount }}</td>
-              <td>{{ tran.get_name }}</td>
-              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+            <td>{{ tran.get_id }}</td>
+            <td>{{ tran.get_type }}</td>
+            <td>{{ tran.get_hotel_name }}</td>
+            <td>{{ tran.get_room_type }}</td>
+            <td>{{ tran.get_room_number}}</td>
+            <td>{{ tran.get_date_in }}</td>
+            <td>{{ tran.get_date_out }}</td>
+            <td>{{ tran.get_price }}</td>
+            <td>{{ tran.get_headcount }}</td>
+            <td>{{ tran.get_name }}</td>
           </tr>
           {% endif %}
           {% endfor %}
@@ -358,6 +364,7 @@
               <th>ประเภทรายการ</th>
               <th>ชื่อบริษัท</th>
               <th>ประเภทรถ</th>
+              <th>เบอร์คนขับ</th>
               <th>วันใช้บริการ</th>
               <th>ประเภทการโดยสาร</th>
               <th>สถานที่ต้นทาง</th>
@@ -365,7 +372,6 @@
               <th>ราคา</th>
               <th>จำนวนคน</th>
               <th>ชื่อ</th>
-              <th>ดำเนินการ</th> <!-- เพิ่มหัวข้อใหม่ -->
           </tr>
       </thead>
       <tbody>
@@ -376,14 +382,14 @@
               <td>{{ tran.get_type }}</td>
               <td>{{ tran.get_taxi_name }}</td>
               <td>{{ tran.get_taxi_type }}</td>
+              <td>{{ tran.get_taxi_number}}</td>
               <td>{{ tran.get_date }}</td>
               <td>{{ tran.get_travel_type }}</td>
               <td>{{ tran.get_pickup_location }}</td>
               <td>{{ tran.get__destination_location }}</td>
               <td>{{ tran.get_price }}</td>
               <td>{{ tran.get_headcount }}</td>
-              <td>{{ tran.get_name }}</td>
-              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+              <td>{{ tran.get_name }}</td> 
           </tr>
           {% endif %}
           {% endfor %}

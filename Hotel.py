@@ -62,8 +62,10 @@ class Room:
     def set_date_out (self, date_out):
         self.__date_out = date_out
 
-    
-
+    @property
+    def reset_room(self):
+        self.__date_in = None
+        self.__date_out = None
 
 class Standard(Room):
     def __init__(self, room_number , head_count , price , bed):

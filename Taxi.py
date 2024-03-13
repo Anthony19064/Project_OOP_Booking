@@ -81,6 +81,12 @@ class Car:
         self.__destination_location = destination_location
         return self
     
+    @property
+    def reset_car(self):
+        self.__travel_type = None
+        self.__travel_date = None
+        self.__pickup_location = None
+        self.__destination_location = None
 
 class Seadard(Car):
     def __init__(self, phone_number, head_count, price):

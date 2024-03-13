@@ -339,10 +339,11 @@ def confirm():
                 account = control.seach_account(session['username'])
                 admin = control.seach_account('admin')
                 if session['username'] == 'admin':
-                    account.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
+                    account.add_transaction(Transection_hotel(hotel_name, room_type, room_number, date_in, date_out, price,head_count, session['username']))
                 else:
-                    admin.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
-                    account.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
+                    tran = Transection_hotel(hotel_name, room_type, room_number, date_in, date_out, price,head_count, session['username'])
+                    account.add_transaction(tran)
+                    admin.add_transaction(tran)
                 return render_template('index.html')
             
             elif type == 'taxi':
@@ -366,13 +367,42 @@ def confirm():
                 account = control.seach_account(session['username'])
                 admin = control.seach_account('admin')
                 if session['username'] == 'admin':
-                    account.add_transaction(Transection_taxi(taxi_name, car_type, date, travel_type, source, des, price, head_count, session['username']))
+                    account.add_transaction(Transection_taxi(taxi_name, car_type, car_phone, date, travel_type, source, des, price, head_count, session['username']))
                 else:
-                    account.add_transaction(Transection_taxi(taxi_name, car_type, date, travel_type, source, des, price, head_count, session['username']))
-                    admin.add_transaction(Transection_taxi(taxi_name, car_type, date, travel_type, source, des, price, head_count, session['username']))
-                return render_template('index.html')
+                    tran = Transection_taxi(taxi_name, car_type, car_phone, date, travel_type, source, des, price, head_count, session['username'])
+                    account.add_transaction(tran)
+                    admin.add_transaction(tran)
+    return render_template('index.html')
 
-    
+@app.route('/deltran/<tran_id>/<name>', methods=['GET', 'POST'])
+def delete_transaction(tran_id, name):
+    # ตรวจสอบว่าเมื่อมี request เป็น POST method มาที่ route นี้
+    if request.method == 'GET':
+        if 'username' in session:
+            account = control.seach_account(name)
+            admin  = control.seach_account('admin')
+            transection_account = account.get_transaction
+            transection_admin = admin.get_transaction
+            for tran in transection_account:
+                if tran.get_id == int(tran_id):
+                    if tran.get_type == 'Hotel':
+                        hotel = control.seach_hotel_from_name(tran.get_hotel_name)
+                        room = hotel.search_room(int(tran.get_room_number))
+                        room.reset_room
+                        transection_account.remove(tran)
+                        transection_admin.remove(tran)
+                    elif tran.get_type == 'Taxi':
+                        taxi = control.seach_taxi(tran.get_taxi_name)
+                        car = taxi.search_car_from_phone(tran.get_taxi_number)
+                        car.reset_car
+                        transection_account.remove(tran)
+                        transection_admin.remove(tran)
+
+            return render_template('profile.html', transection=transection_account, account=account)
+        else:
+            return render_template('index.html')
+
+
 #----------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
