@@ -1,3 +1,5 @@
+import random
+
 class Control:
     def __init__(self):
         self.__hotel_list = []
@@ -107,10 +109,10 @@ class User(Account):
 
     
 class Transection:
-    id = 0
+    id = random.randint(100000, 999999)
     def __init__(self, type):
         self.__id = Transection.id
-        Transection.id += 1
+        Transection.id = random.randint(100000, 999999)
     
     @property
     def get_id (self):
@@ -165,11 +167,13 @@ class Transection_hotel(Transection):
         return self.__name
 
 class Transection_taxi(Transection):
-    def __init__(self, taxi_name, taxi_type, pickup_location, destination_location, price, head_count, name):
+    def __init__(self, taxi_name, taxi_type, date, travel_type, pickup_location, destination_location, price, head_count, name):
         Transection.__init__(self, type)
         self.__type = "Taxi"
         self.__taxi_name = taxi_name
         self.__taxi_type = taxi_type
+        self.__date = date
+        self.__travel_type = travel_type
         self.__pickup_location = pickup_location
         self.__destination_location = destination_location
         self.__price = price
@@ -188,6 +192,14 @@ class Transection_taxi(Transection):
     def get_taxi_type(self):
         return self.__taxi_type
     
+    @property
+    def get_date(self):
+        return self.__date
+
+    @property
+    def get_travel_type(self):
+        return self.__travel_type
+
     @property
     def get_pickup_location(self):
         return self.__pickup_location

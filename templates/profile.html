@@ -54,6 +54,23 @@
     border: 0;
     margin-bottom: 1rem;
   }
+  .table td,
+  .table th {
+    white-space: nowrap; /* ไม่ให้ข้อความขึ้นบรรทัดใหม่ */
+  }
+
+  .table td {
+    max-width: 300px; /* กำหนดความกว้างสูงสุดของเซลล์ */
+    overflow: hidden; /* ป้องกันข้อความที่ยาวเกินไปที่จะเกินขอบเซลล์ */
+    text-overflow: ellipsis; /* การลดข้อความที่ยาวเกินไปให้เหลือเพียงส่วนที่แสดงและเครื่องหมาย ... ที่ส่วนที่ตัดออก */
+  }
+  .container {
+    text-align: center; /* จัดตำแหน่งข้อความใน container เป็นกลาง */
+  }
+
+  .table {
+    margin: 0 auto; /* กำหนดระยะห่างขอบของตาราง ด้านบนและด้านล่างเป็น 0 ด้านซ้ายและด้านขวาเป็น auto (กำหนดให้ตารางอยู่กึ่งกลางตามแนวนอน) */
+  }
 </style>
 
 {% endblock %} 
@@ -73,7 +90,7 @@
                 />
               </div>
               <h5 class="user-name"> {{ session['username'] }} </h5>
-              <h6 class="user-email">yuki@Maxwell.com</h6>
+              <h6 class="user-email">{{ account.get_mail }}</h6>
             </div>
             <div class="about">
               <h5>About</h5>
@@ -214,7 +231,164 @@
     </div>
   </div>
 </div>
-
-
-
+{% if session['username'] == 'admin' %}
+<div class="container">
+  <center><p><h1>ประวัติการทำรายการโรงแรมของลูกค้า</h1></p></center> 
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>เลขรายการ</th>
+              <th>ประเภทรายการ</th>
+              <th>ชื่อโรงแรม</th>
+              <th>ประเภทห้อง</th>
+              <th>วันเช็คอิน</th>
+              <th>วันเช็คเอ้าท์</th>
+              <th>ราคา</th>
+              <th>จำนวนคน</th>
+              <th>ชื่อ</th>
+              <th>ดำเนินการ</th> <!-- เพิ่มหัวข้อใหม่ -->
+          </tr>
+      </thead>
+      <tbody>
+          {% for tran in transection %}
+          {% if tran.get_type == 'Hotel' %}
+          <tr>
+              <td>{{ tran.get_id }}</td>
+              <td>{{ tran.get_type }}</td>
+              <td>{{ tran.get_hotel_name }}</td>
+              <td>{{ tran.get_room }}</td>
+              <td>{{ tran.get_date_in }}</td>
+              <td>{{ tran.get_date_out }}</td>
+              <td>{{ tran.get_price }}</td>
+              <td>{{ tran.get_headcount }}</td>
+              <td>{{ tran.get_name }}</td>
+              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+          </tr>
+          {% endif %}
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+<div class="container mt-5 mb-5">
+  <center><p><h1>ประวัติการทำรายการแท็กซี่ของลูกค้า</h1></p></center> 
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>เลขรายการ</th>
+              <th>ประเภทรายการ</th>
+              <th>ชื่อบริษัท</th>
+              <th>ประเภทรถ</th>
+              <th>วันใช้บริการ</th>
+              <th>ประเภทการโดยสาร</th>
+              <th>สถานที่ต้นทาง</th>
+              <th>สถานที่ปลายทาง</th>
+              <th>ราคา</th>
+              <th>จำนวนคน</th>
+              <th>ชื่อ</th>
+              <th>ดำเนินการ</th> <!-- เพิ่มหัวข้อใหม่ -->
+          </tr>
+      </thead>
+      <tbody>
+          {% for tran in transection %}
+          {% if tran.get_type == 'Taxi' %}
+          <tr>
+              <td>{{ tran.get_id }}</td>
+              <td>{{ tran.get_type }}</td>
+              <td>{{ tran.get_taxi_name }}</td>
+              <td>{{ tran.get_taxi_type }}</td>
+              <td>{{ tran.get_date }}</td>
+              <td>{{ tran.get_travel_type }}</td>
+              <td>{{ tran.get_pickup_location }}</td>
+              <td>{{ tran.get__destination_location }}</td>
+              <td>{{ tran.get_price }}</td>
+              <td>{{ tran.get_headcount }}</td>
+              <td>{{ tran.get_name }}</td>
+              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+          </tr>
+          {% endif %}
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endif %}
+{% if session['username'] != 'admin' %}
+<div class="container">
+  <center><p><h1>ประวัติการทำรายการโรงแรม</h1></p></center> 
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>เลขรายการ</th>
+              <th>ประเภทรายการ</th>
+              <th>ชื่อโรงแรม</th>
+              <th>ประเภทห้อง</th>
+              <th>วันเช็คอิน</th>
+              <th>วันเช็คเอ้าท์</th>
+              <th>ราคา</th>
+              <th>จำนวนคน</th>
+              <th>ชื่อ</th>
+              <th>ดำเนินการ</th> <!-- เพิ่มหัวข้อใหม่ -->
+          </tr>
+      </thead>
+      <tbody>
+          {% for tran in transection %}
+          {% if tran.get_type == 'Hotel' %}
+          <tr>
+              <td>{{ tran.get_id }}</td>
+              <td>{{ tran.get_type }}</td>
+              <td>{{ tran.get_hotel_name }}</td>
+              <td>{{ tran.get_room }}</td>
+              <td>{{ tran.get_date_in }}</td>
+              <td>{{ tran.get_date_out }}</td>
+              <td>{{ tran.get_price }}</td>
+              <td>{{ tran.get_headcount }}</td>
+              <td>{{ tran.get_name }}</td>
+              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+          </tr>
+          {% endif %}
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+<div class="container mt-5 mb-5">
+  <center><p><h1>ประวัติการทำรายการแท็กซี่</h1></p></center> 
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>เลขรายการ</th>
+              <th>ประเภทรายการ</th>
+              <th>ชื่อบริษัท</th>
+              <th>ประเภทรถ</th>
+              <th>วันใช้บริการ</th>
+              <th>ประเภทการโดยสาร</th>
+              <th>สถานที่ต้นทาง</th>
+              <th>สถานที่ปลายทาง</th>
+              <th>ราคา</th>
+              <th>จำนวนคน</th>
+              <th>ชื่อ</th>
+              <th>ดำเนินการ</th> <!-- เพิ่มหัวข้อใหม่ -->
+          </tr>
+      </thead>
+      <tbody>
+          {% for tran in transection %}
+          {% if tran.get_type == 'Taxi' %}
+          <tr>
+              <td>{{ tran.get_id }}</td>
+              <td>{{ tran.get_type }}</td>
+              <td>{{ tran.get_taxi_name }}</td>
+              <td>{{ tran.get_taxi_type }}</td>
+              <td>{{ tran.get_date }}</td>
+              <td>{{ tran.get_travel_type }}</td>
+              <td>{{ tran.get_pickup_location }}</td>
+              <td>{{ tran.get__destination_location }}</td>
+              <td>{{ tran.get_price }}</td>
+              <td>{{ tran.get_headcount }}</td>
+              <td>{{ tran.get_name }}</td>
+              <td><a class="btn btn-danger" href="#" role="button"> ลบ </a></td> 
+          </tr>
+          {% endif %}
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endif %}
 {% endblock %}

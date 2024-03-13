@@ -120,7 +120,6 @@
                   </button>
                   <div class="dropdown-menu dropdown-menu-right my-2">
                     <a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a>
-                    <a class="dropdown-item" href="{{ url_for('test') }}">Another action</a>
                     <div class="dropdown-divider"></div>
                     <form class="form-inline " action="{{ url_for('logout') }}">
                       <button class="btn btn-outline-danger mx-auto" type="submit">
@@ -207,7 +206,7 @@
                         โดยราคาต่อคืนจะอยู่ที่ <b>{{ rooms[i].get_price }}</b> บาท</p>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ url_for('pay', hotel=hotels.get_name, room=rooms[i].get_room_number) }}" class="btn btn-dark" >จองห้องพัก</a>
+                    <a href="{{ url_for('pay', hotel=hotels.get_name, room=rooms[i].get_room_number, type='hotel' ) }}" class="btn btn-dark" >จองห้องพัก</a>
 
                 </div>                
             </div>

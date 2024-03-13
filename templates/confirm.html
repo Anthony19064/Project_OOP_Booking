@@ -33,15 +33,7 @@ form {
     justify-content: center;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-button {
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+
 
 button {
     background-color: #007bff;
@@ -78,20 +70,27 @@ button:hover {
         width: 80%;
     }
 }
-
-.bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background-color: #6a6767cc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
+h2 {
+    margin-top: 10px;
+    color: #007bff;
+    font-size: 40px;
     font-weight: bold;
+    background: linear-gradient(55deg, #1714c5, rgb(211, 211, 245));
+    background-size: 40%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 5s infinite ease-in-out;
 }
+@keyframes gradient {
+    0%, 100% { /* เริ่มและสิ้นสุดที่จุดเดิม */
+      background-position: 0% 50%;
+    }
+    50% { /* สามารถกำหนดการเคลื่อนไหวตรงกลางโดยใช้ 50% */
+      background-position: 100% 50%;
+    }
+  }
+
+
 
 </style>
 
@@ -99,11 +98,12 @@ button:hover {
 
 {% block content %}
 
-<!-- <center><h1>โรงแรมที่คุณเลือก {{hotel.get_name}} Hotel</h1></center>
-<center><p style="font-size: 30px; ">ห้องประเภท {{ room.get_type_room }}</p></center> -->
+
 <div class="test">
+    {% if type == 'hotel' %}
+    <center><h2>รายละเอียดการจองโรงแรม</h2></center>
     <div class="section">
-        <h2>รายละเอียดการจองโรงแรม</h2>
+        
         <form action="/confirm" method="post"   >
             <input type="hidden" id="hotel_name" name="hotel_name" value="{{ hotel.get_name }}">
             <input type="hidden" id="room_type" name="room_type" value="{{ room.get_type_room }}">
@@ -112,6 +112,7 @@ button:hover {
             <input type="hidden" id="date_in" name="date_in" value="{{ date_in}}">
             <input type="hidden" id="date_out" name="date_out" value="{{ date_out}}">
             <input type="hidden" id="price" name="price" value="{{ price }}">
+            <input type="hidden" id="type" name="type" value="hotel">
 
 
             <p>ชื่อโรงแรม: <b>{{ hotel.get_name }} Hotel</b></p>
@@ -127,10 +128,40 @@ button:hover {
         </form>
         
     </div>
+    {% endif %}
+    {% if type == 'taxi' %}
+    <center><h2>รายละเอียดการจองรถแท็กซี่</h2></center>
+    <div class="section">
+        
+        
+        <form action="/confirm" method="post" >
+            <input type="hidden" id="taxi_name" name="taxi_name" value="{{ taxi.get_name }}">
+            <input type="hidden" id="car_type" name="car_type" value="{{ car.get_car_type }}">
+            <input type="hidden" id="car_phone" name="car_phone" value="{{ car.get_phone_number }}">
+            <input type="hidden" id="head_count" name="head_count" value="{{ head_count }}">
+            <input type="hidden" id="date" name="date" value="{{ date }}">
+            <input type="hidden" id="travel_type" name="travel_type" value="{{ travel_type }}">
+            <input type="hidden" id="source" name="source" value="{{ source }}">
+            <input type="hidden" id="des" name="des" value="{{ des }}">
+            <input type="hidden" id="price" name="price" value="{{ price }}">
+            <input type="hidden" id="type" name="type" value="taxi">
+            <p>ชื่อบริษัทแท็กซี่: <b>{{ taxi.get_name }} Hotel</b></p>
+            <p>ประเภทรถ: <b>{{ car.get_car_type }}</b></p>
+            <p>จำนวนคนโดยสาร : <b>{{ head_count }}</b> คน</p>
+            <P>วันใช้บริการ <b>{{ date }}</b></P>
+            <p>ประเภทการโดยสาร <b>{{ travel_type }}</b></p>
+            <p>สถานที่ต้นทาง <b>{{ source }} </b></p>
+            <p>สถานที่ปลายทาง <b>{{ des }} </b></p>
+            <p>ราคาทั้งหมด: <b>{{ price }}</b> บาท</p>
+            <center><button type="submit" class="btn btn-success">ยืนยันการจอง</button></center>
+        
+
+        </form>
+        
+    </div>
+    {% endif %}
 </div>
-<div class="bottom-bar">
-    <p><center>Booking@hotel.com</center></p>
-</div>
+
 
 </div>
 

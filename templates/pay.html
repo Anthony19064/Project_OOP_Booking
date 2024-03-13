@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 
 {% block style %}
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet"/>
 <style>
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Roboto Mono", monospace;
     background-color: #f8f9fa;
     color: #333;
 }
@@ -23,8 +24,24 @@ body {
 }
 
 h2 {
+    margin-top: 10px;
     color: #007bff;
+    font-size: 40px;
+    font-weight: bold;
+    background: linear-gradient(55deg, #1714c5, rgb(211, 211, 245));
+    background-size: 40%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 5s infinite ease-in-out;
 }
+@keyframes gradient {
+    0%, 100% { /* เริ่มและสิ้นสุดที่จุดเดิม */
+      background-position: 0% 50%;
+    }
+    50% { /* สามารถกำหนดการเคลื่อนไหวตรงกลางโดยใช้ 50% */
+      background-position: 100% 50%;
+    }
+  }
 
 form {
     display: flex;
@@ -33,15 +50,7 @@ form {
     justify-content: center;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-button {
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+
 
 button {
     background-color: #007bff;
@@ -79,68 +88,87 @@ button:hover {
     }
 }
 
-.bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background-color: #6a6767cc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-weight: bold;
+p{
+    font-size: 20px;
 }
+
 
 </style>
 
 {% endblock %}
 
 {% block content %}
-
-<!-- <center><h1>โรงแรมที่คุณเลือก {{hotel.get_name}} Hotel</h1></center>
-<center><p style="font-size: 30px; ">ห้องประเภท {{ room.get_type_room }}</p></center> -->
+{% if type == 'hotel' %}
 <div class="test">
-    {% if popup %}
-    <center> 
-       <div class="alert alert-danger" role="alert">
-           {{ warning }}
-       </div></center>
-   {% endif %}
+    <center><h2>แบบฟอร์มการจองโรงแรม</h2></center>
+     <div class="section" style="display: flex; justify-content: space-between;">
+         
+         <div class="sec-txt">
+ 
+            <form id="bookingForm_hotel" action="/confirm_page" method="post" onsubmit="return validateHotelForm()">
+             <input type="hidden" id="hotel_name" name="hotel_name" value="{{ hotel.get_name }}">
+             <input type="hidden" id="room_type" name="room_number" value="{{ room.get_room_number}}">
+             <input type="hidden" id="type" name="type" value="hotel">
+ 
+             <p>ชื่อโรงแรม: <b>{{ hotel.get_name }} Hotel</b></p>
+             <p>ประเภทห้อง: <b>{{ room.get_type_room }}</b></p>
+             <p>จำนวนคนที่พักได้: <b>{{ room.get_head_count }}</b> คน</p>
+             <p>ราคาต่อคืน: <b>{{ room.get_price }}</b> บาท</p>
+ 
+             <p class="date">วันเช็คอิน:
+                 <div class="btn-group">
+                     <input type="date" id="date_in" name="date_in" min="date" max="2030-12-31" onchange="setMinDateOut()" />
+                 </div>
+             </p>
+             <p class="date">วันเช็คเอ้าท์:
+                 <div class="btn-group">
+                     <input type="date" id="date_out" name="date_out" max="2030-12-31" />
+                 </div>
+             </p>
+             <label class="form-label" for="head_count">จำนวนคนเข้าพัก</label>
+             <input type="number" name="head_count" id="head_count" min="1" max="{{ room.get_head_count }}">
+             <button type="submit" class="btn btn-success" style="display: block; transform: translate(0px ,10px);">ยืนยัน</button>
+         </form>
+     </div>
+{% endif %}
+{% if type == 'taxi' %}
+<div class="test">
+    <center><h2>แบบฟอร์มการจองรถแท็กซี่</h2></center>
+     <div class="section" style="display: flex; justify-content: space-between;">
+         
+         <div class="sec-txt">
+ 
+            <form id="bookingForm_taxi" action="/confirm_page" method="post" onsubmit="return validateTaxiForm()">
+                <input type="hidden" id="taxi_name" name="taxi_name" value="{{ taxi.get_name }}">
+                <input type="hidden" id="car_phone" name="car_phone" value="{{ car.get_phone_number }}">
+                <input type="hidden" id="type" name="type" value="taxi">
+    
+                <p>ชื่อบริษัทแท็กซี่: <b>{{ taxi.get_name }}</b></p>
+                <p>ประเภทรถ: <b>{{ car.get_car_type }}</b></p>
+                <p>จำนวนคนที่โดยสารได้: <b>{{ car.get_head_count }}</b> คน</p>
+                <p>ราคาต่อครั้ง: <b>{{ car.get_price }}</b> บาท</p>
+    
+                <p class="date">วันใช้บริการ:
+                    <div class="btn-group">
+                        <input type="date" id="date_in" name="date_in" min="date" max="2030-12-31" onchange="setMinDateOut()" />
+                    </div>
+                </p>
+                <label class="form-label" for="head_count">จำนวนคนโดยสาร</label>
+                <input type="number" name="head_count" id="head_count" min="1" max="{{ car.get_head_count }}">
+                <label class="form-label mt-3" for="source">สถานที่ต้นทาง</label>
+                <input type="text" name="source" id="source">
+                <label class="form-label mt-3" for="des">สถานที่ปลายทาง</label>
+                <input type="text" name="des" id="des">
+                <label class="form-label mt-3" for="travel_type">ประเภทการโดยสาร</label>
+                <select class="form-select mt-3" name="travel_type" id="travel_type">
+                    <option value="เที่ยวเดียว">เที่ยวเดียว</option>
+                    <option value="ไป-กลับ">ไป-กลับ</option>
+                </select>
+                <button type="submit" class="btn btn-success mt-3" style="display: block; transform: translate(0px ,10px);">ยืนยัน</button>
+            </form>
+     </div>
+{% endif %}
 
-    <div class="section" style="display: flex; justify-content: space-between;">
-        <div class="sec-txt">
-        <h2>แบบฟอร์มการจองโรงแรม</h2>
-        <form id="bookingForm" action="/confirm_page" method="post">
-            <input type="hidden" id="hotel_name" name="hotel_name" value="{{ hotel.get_name }}">
-            <input type="hidden" id="room_type" name="room_number" value="{{ room.get_room_number}}">
-
-            <p>ชื่อโรงแรม: <b>{{ hotel.get_name }} Hotel</b></p>
-            <p>ประเภทห้อง: <b>{{ room.get_type_room }}</b></p>
-            <p>จำนวนคนที่พักได้: <b>{{ room.get_head_count }}</b> คน</p>
-            <p>ราคาต่อคืน: <b>{{ room.get_price }}</b> บาท</p>
-
-            <p class="date">วันเช็คอิน:
-                <div class="btn-group">
-                    <input type="date" id="date_in" name="date_in" min="date" max="2030-12-31" onchange="setMinDateOut()" />
-                </div>
-            </p>
-            <p class="date">วันเช็คเอ้าท์:
-                <div class="btn-group">
-                    <input type="date" id="date_out" name="date_out" max="2030-12-31" />
-                </div>
-            </p>
-            <label class="form-label" for="head_count">จำนวนคนเข้าพัก</label>
-            <input type="number" name="head_count" id="head_count" min="1" max="{{ room.get_head_count }}">
-            <button type="submit" class="btn btn-success" style="display: block; transform: translate(0px ,10px);">ยืนยัน</button>
-
-            
-        </form>
-    </div>
-    <div class="bottom-bar">
-        <p><center>Booking@hotel.com</center></p>
-    </div>
 
 <script>
      function setMinDateOut() {
@@ -158,21 +186,36 @@ button:hover {
     var formattedDate = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth() + 1)).slice(-2) + '-' + ('0' + currentDate.getDate()).slice(-2);
     // กำหนดค่า attribute min ของ input element เป็นวันปัจจุบัน
     document.getElementById("date_in").setAttribute("min", formattedDate);
+    document.getElementById("date").setAttribute("min", formattedDate);
 
 
-    document.getElementById('bookingForm').addEventListener('submit', function(event) {
-        // เริ่มต้นการตรวจสอบเมื่อมีการส่งฟอร์ม
-        var dateIn = document.getElementById('date_in').value;
-        var dateOut = document.getElementById('date_out').value;
-        var headCount = document.getElementById('head_count').value;
+function validateTaxiForm() {
+        // ตรวจสอบค่าของฟิลด์ที่ต้องการ
+        var dateValue = document.getElementById("date_in").value;
+        var headCountValue = document.getElementById("head_count").value;
+        var sourceValue = document.getElementById("source").value;
+        var destinationValue = document.getElementById("des").value;
 
-        // ตรวจสอบว่าไม่มีค่าว่าง
-        if (dateIn === '' || dateOut === '' || headCount === '') {
-            // หยุดการส่งฟอร์ม
-            event.preventDefault();
-            // แสดงข้อความแจ้งเตือน
-            alert('กรุณากรอกข้อมูลให้ครบทุกช่อง');
+        // ตรวจสอบว่ามีฟิลด์ใดมีค่าว่างหรือไม่
+        if (dateValue === "" || headCountValue === "" || sourceValue === "" || destinationValue === "") {
+            alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+            return false; // ยกเลิกการส่งข้อมูล
         }
-    });
+        return true; // ส่งข้อมูลได้
+    }
+function validateHotelForm() {
+        // ตรวจสอบค่าของฟิลด์ที่ต้องการ
+        var dateInValue = document.getElementById("date_in").value;
+        var dateOutValue = document.getElementById("date_out").value;
+        var headCountValue = document.getElementById("head_count").value;
+
+        // ตรวจสอบว่ามีฟิลด์ใดมีค่าว่างหรือไม่
+        if (dateInValue === "" || dateOutValue === "" || headCountValue === "") {
+            alert("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+            return false; // ยกเลิกการส่งข้อมูล
+        }
+        return true; // ส่งข้อมูลได้
+    }
+
 </script>
 {% endblock %}

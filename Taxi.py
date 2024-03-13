@@ -30,12 +30,17 @@ class Taxi:
                 car_list.append(car)
         return car_list
     
+    def search_car_from_phone(self, phone):
+        for car in self.__car_list:
+            if car.get_phone_number == phone:
+                return car
+        return None
+    
 class Car:
     def __init__(self, phone_number):
         self.__phone_number = phone_number
         self.__travel_type = None
         self.__travel_date = None
-        self.__travel_time = None
         self.__pickup_location = None
         self.__destination_location = None
     
@@ -51,9 +56,6 @@ class Car:
     def get_travel_date (self):
         return self.__travel_date
 
-    @property
-    def get_travel_time (self):
-        return self.__travel_time
     
     @property
     def get_pickup_location (self):
@@ -69,10 +71,6 @@ class Car:
     
     def set_travel_date (self, travel_date):
         self.__travel_date = travel_date
-        return self
-
-    def set_travel_time (self, travel_time):
-        self.__travel_time = travel_time
         return self
     
     def set_pickup_location (self, pickup_location):

@@ -134,6 +134,7 @@ def creat_instance():
 
     #สร้าง account admin และเพิ่ม account admin เข้า list main
     control.add_account( Admin('admin', 'admin', 'booking@gmail.com'))
+    control.add_account( User('test', 'test', 'test@gmail.com'))
 
 #ฟังก์ชั่นสร้างแอคเค้า
 def creat_account (name, password, mail):

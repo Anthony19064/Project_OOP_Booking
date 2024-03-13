@@ -129,15 +129,13 @@ def Feedback():
 
 @app.route('/profile')
 def profile():
-    account = control.seach_account(session['username'])
-    transection = account.get_transaction
-    return render_template('profile.html', transection=transection)
+    if 'username' in session:
+        account = control.seach_account(session['username'])
+        transection = account.get_transaction
+        return render_template('profile.html', transection=transection, account=account)
+    else:
+        return render_template('index.html')
 
-@app.route('/test')
-def test():
-    account = control.seach_account(session['username'])
-    transection = account.get_transaction
-    return render_template('test.html', transection=transection)
 
 #--------------------Login-----Logout-----Register------------------------------------------------------------
 
@@ -230,16 +228,24 @@ def taxi_page(taxi_name):
 
 @app.route('/pay')
 def pay():
+    type = request.args.get('type')
     hotel = request.args.get('hotel')
     room = request.args.get('room')
-    date_in = request.args.get('date_in')
-    hotels = control.seach_hotel_from_name(hotel)
-    rooms = hotels.search_room(int(room))
+    taxi = request.args.get('taxi')
+    car = request.args.get('car')
 
     if session.get('username') is None:
         return redirect(url_for('login'))
-    else:
-        return render_template('pay.html', hotel=hotels, room=rooms)
+    elif type == 'hotel':
+        hotels = control.seach_hotel_from_name(hotel)
+        rooms = hotels.search_room(int(room))
+        return render_template('pay.html', hotel=hotels, room=rooms, type=type)
+    elif type == 'taxi':
+        taxis = control.seach_taxi(taxi)
+        cars = taxis.search_car_from_phone(car)
+        return render_template('pay.html', car=cars, taxi=taxis, type=type)
+
+        
 
 @app.route('/confirm_page', methods=['GET', 'POST'])
 def confirm_page():
@@ -247,67 +253,125 @@ def confirm_page():
         return redirect(url_for('login'))
     else:
         if request.method == 'POST':
-            hotel_name = request.form.get('hotel_name')
-            room_number = request.form.get('room_number')
-            date_in = request.form.get('date_in')
-            date_out = request.form.get('date_out')
-            head_count = request.form.get('head_count')
-            hotel = control.seach_hotel_from_name(hotel_name)
-            room = hotel.search_room(int(room_number))
+            type = request.form.get('type')
+            if type == 'hotel':
+                hotel_name = request.form.get('hotel_name')
+                room_number = request.form.get('room_number')
+                date_in = request.form.get('date_in')
+                date_out = request.form.get('date_out')
+                head_count_hotel = request.form.get('head_count')
 
-            date1 = int(date_in[8:])
-            date2 = int(date_out[8:])
-            month1 = int(date_in[5:7])
-            month2 = int(date_out[5:7])
-            year1 = int(date_in[0:4])
-            year2 = int(date_out[0:4])
+                hotel = control.seach_hotel_from_name(hotel_name)
+                room = hotel.search_room(int(room_number))
 
-            day = date2 - date1
-            month = month2 - month1
-            year = year2 - year1
-            price_room = room.get_price
-            day_count = 0
-            if year > 0:
-                if month > 0:
-                    price = (day + (month *30) + (year *365)) * price_room
-                    day_count += (day + (month *30) + (year *365))
+                date1 = int(date_in[8:])
+                date2 = int(date_out[8:])
+                month1 = int(date_in[5:7])
+                month2 = int(date_out[5:7])
+                year1 = int(date_in[0:4])
+                year2 = int(date_out[0:4])
+
+                day = date2 - date1
+                month = month2 - month1
+                year = year2 - year1
+                price_room = room.get_price
+                day_count = 0
+                if year > 0:
+                    if month > 0:
+                        price = (day + (month *30) + (year *365)) * price_room
+                        day_count += (day + (month *30) + (year *365))
+                    else:
+                        price = (day + (year *365)) * price_room
+                        day_count += (day + (year *365))
                 else:
-                    price = (day + (year *365)) * price_room
-                    day_count += (day + (year *365))
-            else:
-                if month > 0:
-                    price = (day + (month *30)) * price_room
-                    day_count += (day + (month *30))
-                else:
-                    price = day * price_room
-                    day_count += day
-            
+                    if month > 0:
+                        price = (day + (month *30)) * price_room
+                        day_count += (day + (month *30))
+                    else:
+                        price = day * price_room
+                        day_count += day
+                
 
-            return render_template('confirm.html', hotel=hotel, room=room, date_in=date_in, date_out=date_out, head_count=head_count, day=day_count , price=price)
+                return render_template('confirm.html', hotel=hotel, room=room, date_in=date_in, date_out=date_out, head_count=head_count_hotel, day=day_count , price=price, type='hotel')
+            elif type == 'taxi':
+                taxi_name = request.form.get('taxi_name')
+                car_phone = request.form.get('car_phone')
+                date = request.form.get('date_in')
+                head_count_taxi = request.form.get('head_count')
+                source = request.form.get('source')
+                des = request.form.get('des')
+                travel_type = request.form.get('travel_type')
+
+                taxi = control.seach_taxi(taxi_name)
+                car = taxi.search_car_from_phone(car_phone)
+                price = car.get_price
+
+                if travel_type == 'เที่ยวเดียว':
+                    return render_template('confirm.html', taxi=taxi, car=car, date=date, head_count=head_count_taxi, source=source, des=des, price=price, travel_type=travel_type, type='taxi')
+                elif travel_type == 'ไป-กลับ':
+                    price *= 2
+                    return render_template('confirm.html', taxi=taxi, car=car, date=date, head_count=head_count_taxi, source=source, des=des, price=price, travel_type=travel_type, type='taxi')
+
     return redirect(url_for('index'))
         
 
 @app.route('/confirm', methods=['GET', 'POST'])
 def confirm():
-    hotel_name = request.form.get('hotel_name')
-    room_type = request.form.get('room_type')
-    room_number = request.form.get('room_number')
-    head_count = request.form.get('head_count')
-    date_in = request.form.get('date_in')
-    date_out = request.form.get('date_out')
-    price = request.form.get('price')
+    if session.get('username') is None:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST':
+            type = request.form.get('type')
+            if type == 'hotel':
+                hotel_name = request.form.get('hotel_name')
+                room_type = request.form.get('room_type')
+                room_number = request.form.get('room_number')
+                head_count = request.form.get('head_count')
+                date_in = request.form.get('date_in')
+                date_out = request.form.get('date_out')
+                price = request.form.get('price')
 
-    hotel = control.seach_hotel_from_name(hotel_name)
-    room = hotel.search_room(int(room_number))
-    room.set_date_in(date_in)
-    room.set_date_out(date_out)
-    # room.set_date_in(date_in)
-    # room.set__date_out(date_out)
+                hotel = control.seach_hotel_from_name(hotel_name)
+                room = hotel.search_room(int(room_number))
+                room.set_date_in(date_in)
+                room.set_date_out(date_out)
 
+                account = control.seach_account(session['username'])
+                admin = control.seach_account('admin')
+                if session['username'] == 'admin':
+                    account.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
+                else:
+                    admin.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
+                    account.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
+                return render_template('index.html')
+            
+            elif type == 'taxi':
+                taxi_name = request.form.get('taxi_name')
+                car_type = request.form.get('car_type')
+                car_phone = request.form.get('car_phone')
+                head_count = request.form.get('head_count')
+                date = request.form.get('date')
+                travel_type = request.form.get('travel_type')
+                source = request.form.get('source')
+                des = request.form.get('des')
+                price = request.form.get('price')
 
-    account = control.seach_account(session['username'])
-    account.add_transaction(Transection_hotel(hotel_name, room_type, date_in, date_out, price,head_count, session['username']))
-    return render_template('index.html')
+                taxi = control.seach_taxi(taxi_name)
+                car = taxi.search_car_from_phone(car_phone)
+                car.set_travel_type(travel_type)
+                car.set_travel_date(date)
+                car.set_pickup_location(source)
+                car.set_destination_location(des)
+
+                account = control.seach_account(session['username'])
+                admin = control.seach_account('admin')
+                if session['username'] == 'admin':
+                    account.add_transaction(Transection_taxi(taxi_name, car_type, date, travel_type, source, des, price, head_count, session['username']))
+                else:
+                    account.add_transaction(Transection_taxi(taxi_name, car_type, date, travel_type, source, des, price, head_count, session['username']))
+                    admin.add_transaction(Transection_taxi(taxi_name, car_type, date, travel_type, source, des, price, head_count, session['username']))
+                return render_template('index.html')
+
     
 #----------------------------------------------------------------------------------------------
 
