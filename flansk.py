@@ -6,6 +6,7 @@ import os
 creat_instance()
 app = Flask(__name__)
 app.secret_key = 'booking'
+
 hotel_list = control.get_hotel_list
 taxi_list = control.get_taxi_list
 account_list = control.get_account_list
