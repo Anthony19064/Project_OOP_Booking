@@ -70,6 +70,7 @@ def get_image(folder, image_name):
 
     return print("Invalid folder")
 
+
 #--------------------MainPage----------------------------------------------
 
 @app.route('/')
